@@ -575,9 +575,9 @@ public void draw() {
   
   
   fill(255,255,255);
-  textSize(15);
+  textSize(20);
   //text("CONFIGURATIONS", 1100, height/2 + 330);
-  text("ARROW KEYS: to MOVE around grid | ENTER KEY: to SELECT | TAB KEY: to EXIT a section", 515, height/2 + 460);
+  text("ARROW KEYS: to MOVE around grid | ENTER KEY: to SELECT | TAB KEY: to EXIT a section", 400, height/2 + 460);
   //text("ENTER KEY: to SELECT |", 800, height/2 + 460);
   //text("TAB KEY: to EXIT a section", 950, height/2 + 460);
   
