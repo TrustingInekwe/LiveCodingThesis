@@ -88,6 +88,7 @@ int currentNotePosition, propLeave = 0, propRighty = 0, propUpward = 0;
 int propHighlight = 0, instPropRighty = 0, instPropUpward = 0, propcurrentPositionX = 0, propcurrentPositionY = 0;
 int patList1 = 0, patList2 = 0, decide = 0;
 int time = millis();
+int time2 = millis();
 int FunctionBlinker = 0;
 
 float[] freqBaseVal = new float [7];
@@ -552,7 +553,7 @@ public void draw() {
       }
     }
   }
-
+print("\npropHighlight == "+ propHighlight);
   if (propHighlight == 1) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
       property0();
@@ -1289,6 +1290,7 @@ void property0() {
 }
 // property section after selecting
 void propFunction0() {
+  
    for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -1307,11 +1309,13 @@ void propFunction0() {
         int j = h/50;
         if(instPropUpward == j){
           fill(color(#C62222));
-            int passedMillis = millis() - time; // calculates passed milliseconds
+            int passedMillis = millis() - time2; // calculates passed milliseconds
             if(passedMillis >= 315){
-                time = millis();
+                time2 = millis();
               fill(#000000);
+              print("\nhahaha");
             }
+            //print("\nhahaha");
           rect(498 + (i*130), height/2 + 30 + (j*173), 125, 132);
         }
       }
