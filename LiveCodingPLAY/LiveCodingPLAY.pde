@@ -16,11 +16,19 @@ import ddf.minim.ugens.*;
 
 Minim minim;
 AudioOutput out;
-AudioPlayer  kick1, snare, clap, hat, tom;
+//AudioPlayer  kick1, snare clap, hat, tom;
+//AudioPlayer clap1;
+AudioPlayer [] snare = new AudioPlayer [8];
+AudioPlayer [] clap = new AudioPlayer [8];
+AudioPlayer [] hat = new AudioPlayer [8];
+AudioPlayer [] tom = new AudioPlayer [8];
+
 Gain gainAudio;
 Pan panAudio;
 FilePlayer filePlayerKick1, filePlayerSnare1, filePlayerClap1, filePlayerHat1, filePlayerTom1;
 float panhat = 1.0;
+
+
 
 //snare = minim.loadFile("snare.wav");
 //kick1 = minim.loadFile("kiiiik.wav");
@@ -95,6 +103,8 @@ int FunctionBlinker = 0;
 float[] freqBaseVal = new float [7];
 //130.81, fr10 = 146.83, fr20 = 164.81, fr30 = 174.61, fr40 = 196.00, fr50 = 220.00, fr60 = 246.94;
 float[][] frNew = new float [8][7];
+int [] gainValues = new int [8];
+
 //======================================================================================initialization ends=========================================================================================================================================
 
 ToneInstrument[][] myNote;
@@ -240,14 +250,25 @@ public void setup() {
     //filePlayerKick1.patch(gainAudio).patch(out);
     //filePlayerSnare1.patch(gainAudio).patch(out);
     
-    
-  snare = minim.loadFile("snare.wav");
-  kick1 = minim.loadFile("kiiiik.wav");
-  clap = minim.loadFile("707-clap.wav");
-  hat = minim.loadFile("massive-hi-hat-8.wav");
-  tom = minim.loadFile("808-tom.wav");
+  for(int i = 0; i < 8; i++){
+    snare[i] = minim.loadFile("snare.wav");
+  }   
+  for(int i = 0; i < 8; i++){
+    clap[i] = minim.loadFile("707-clap.wav");
+  }  
+  for(int i = 0; i < 8; i++){
+    hat[i] = minim.loadFile("massive-hi-hat-8.wav");
+  }  
+  //for(int i = 0; i < 8; i++){
+  //  tom[i] = minim.loadFile("808-tom.wav");
+  //}
   
-  //hat.setPan(0);
+  //kick1 = minim.loadFile("kiiiik.wav");
+  //clap1 = minim.loadFile("707-clap.wav");
+  //hat = minim.loadFile("massive-hi-hat-8.wav");
+  //tom = minim.loadFile("808-tom.wav");
+  
+  //clap1.setPan(-1);
   //========================================================================================= Synth Values INITIALIZATION =========================================================================================================================================  
   freqBaseVal[0] = 130.81;
   freqBaseVal[1] = 146.83;
@@ -285,6 +306,14 @@ public void setup() {
   for (int i = 0; i<8; i++) {
     panValue[i] = 0;
   }
+  for (int i = 0; i<8; i++) {
+    clap[i].setGain(-20);
+    snare[i].setGain(-20);
+    hat[i].setGain(-20);
+  }
+  //for (int i = 0; i<8; i++) {
+  //  gainValues[i] = 0;
+  //}
   //========================================================================================= DECISION INITIALIZATION =========================================================================================================================================  
   for (int i = 0; i<8; i++) {
     for (int j = 0; j<8; j++) {
@@ -526,7 +555,8 @@ public void draw() {
     run = (run % 8) + 1;
     playSound(run);
   }
-
+  
+  
  
   selectInstrument(); //selecting an Instrument
   if (decide == 1) {
@@ -555,9 +585,9 @@ public void draw() {
       }
     }
   }
-  if (righty > -1 && righty < 8){
-    print("\ndecision[upward][righty] ==" +decision[upward][righty]);
-  }
+  //if (righty > -1 && righty < 8){
+  //  print("\ndecision[upward][righty] ==" +decision[upward][righty]);
+  //}
 //print("\npropHighlight == "+ propHighlight);
   if (propHighlight == 1) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
@@ -1258,17 +1288,19 @@ void playSound(int run){
           print("kick!!!!!!!!!!!!!");
         }
         if(instruments[i].getLabel() == "S N A R E"){
-          snare.rewind();
-          snare.play();
+          snare[i].rewind();
+          snare[i].play();
         }
         if(instruments[i].getLabel() == "C L A P"){
-          clap.rewind();
-          clap.play(); 
+          
+          clap[i].setPan(-1);
+          clap[i].rewind();
+          clap[i].play(); 
         }
         if(instruments[i].getLabel() == "H A T"){
-          
-          hat.rewind();
-          hat.play(); 
+          hat[i].setPan(-1);
+          hat[i].rewind();
+          hat[i].play(); 
         }
       }
     }
