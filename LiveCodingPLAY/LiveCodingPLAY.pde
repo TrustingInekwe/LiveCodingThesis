@@ -178,42 +178,6 @@ class ToneInstrument implements Instrument
     //pan1.patch(out);
   }
 }
-  
-void chooseOutput(){
-  gainAudio = new Gain(-5.f);
-  if(instUpward == 0){
-    if(intRighty == 0){
-      filePlayerKick1 = new FilePlayer( minim.loadFileStream(kick11) ); 
-      filePlayerKick1.patch(gainAudio).patch(out);
-      
-    }
-    if(intRighty == 1){
-      filePlayerSnare1 = new FilePlayer( minim.loadFileStream(snare11) ); 
-      filePlayerSnare1.patch(gainAudio).patch(out);
-      //gainAudio = new Gain(-5.f);
-    }
-    if(intRighty == 2){
-      filePlayerHat1 = new FilePlayer( minim.loadFileStream(hat11) ); 
-      filePlayerHat1.patch(gainAudio).patch(out);
-      //gainAudio = new Gain(-5.f);
-    }
-  }
-  if(instUpward == 1){
-    if(intRighty == 0){
-      //filePlayerSynth1.patch(gainAudio).patch(out);
-      //gainAudio = new Gain(-5.f);
-    }
-    if(intRighty == 1){
-      filePlayerClap1 = new FilePlayer( minim.loadFileStream(clap11) );
-      filePlayerClap1.patch(gainAudio).patch(out);
-      //gainAudio = new Gain(-5.f);
-    }
-    if(intRighty == 2){
-      //filePlayerTom1.patch(gainAudio).patch(out);
-      //gainAudio = new Gain(-5.f);
-    }
-  }
-}
 
 //=========================================================================================setup starts=========================================================================================================================================
 public void setup() {
@@ -258,10 +222,16 @@ public void setup() {
   //  tom[i] = minim.loadFile("808-tom.wav");
   //}
   
-  //kick1 = minim.loadFile("kiiiik.wav");
-  //clap1 = minim.loadFile("707-clap.wav");
-  //hat = minim.loadFile("massive-hi-hat-8.wav");
-  //tom = minim.loadFile("808-tom.wav");
+  kick1 = minim.loadFile("kiiiik.wav");
+  clap1 = minim.loadFile("707-clap.wav");
+  hat1 = minim.loadFile("massive-hi-hat-8.wav");
+  tom1 = minim.loadFile("808-tom.wav");
+  snare1 = minim.loadFile("snare.wav");
+  
+  kick1.setGain(-20);
+  clap1.setGain(-20);
+  hat1.setGain(-20);
+  snare1.setGain(-20);
   
   //clap1.setPan(-1);
   //========================================================================================= Synth Values INITIALIZATION =========================================================================================================================================  
@@ -915,13 +885,12 @@ void keyPressed() {
       if (entVal_instrument == 2 && highlight == 2 && instUpward > 0 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4) ) {
         instUpward--;
         if(intRighty == 0){
-          //chooseOutput();
-          //filePlayerKick1.rewind();
-          //filePlayerKick1.play();
+          kick1.rewind();
+          kick1.play();
         }
         if(intRighty == 1){
-          //filePlayerSnare1.rewind();
-          //filePlayerSnare1.play();
+          snare1.rewind();
+          snare1.play();
         }
       }
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1  && notes0Col <= 2 && notes0Col >= 1 && (redhighlight == 1 || redhighlight == 4)) {
@@ -979,8 +948,8 @@ void keyPressed() {
         }
         if(intRighty == 1){
           instUpward++;
-          //filePlayerClap1.rewind();
-          //filePlayerClap1.play();
+          clap1.rewind();
+          clap1.play();
         }
         if(intRighty == 2){
           
@@ -1041,22 +1010,19 @@ void keyPressed() {
           intRighty++;
           //intRighty = constrain (intRighty, 0, 2);
           if (intRighty == 1){
-            //chooseOutput();
-            //filePlayerSnare1.rewind();
-            //filePlayerSnare1.play();
+            snare1.rewind();
+            snare1.play();
           }
           if (intRighty == 2){
-            chooseOutput();
-            //filePlayerHat1.rewind();
-            //filePlayerHat1.play();
+            hat1.rewind();
+            hat1.play();
           }
         }
         if(instUpward == 1){
           intRighty++;
           if (intRighty == 1){
-            //chooseOutput();
-            //filePlayerClap1.rewind();
-            //filePlayerClap1.play();
+            clap1.rewind();
+            clap1.play();
           }
           intRighty = constrain (intRighty, 0, 1);
         }
@@ -1118,21 +1084,18 @@ void keyPressed() {
         intRighty--;
         if(instUpward == 0){
           if (intRighty == 0){
-            //chooseOutput();
-            //filePlayerKick1.rewind();
-            //filePlayerKick1.play();
+            kick1.rewind();
+            kick1.play();
           }
           if (intRighty == 1){
-            //chooseOutput();
-            //filePlayerSnare1.rewind();
-            //filePlayerSnare1.play();
+            snare1.rewind();
+            snare1.play();
           }
         }
         if(instUpward == 1){
           if (intRighty == 1){
-            //chooseOutput();
-            //filePlayerClap1.rewind();
-            //filePlayerClap1.play();
+            clap1.rewind();
+            clap1.play();
           }
           if (intRighty == 2){
             
