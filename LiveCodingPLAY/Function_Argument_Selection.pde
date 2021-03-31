@@ -151,7 +151,7 @@ void funcPropSelec(){
                    }
                    if (time0Row == 1){
                      propertiesArray[propUpward][propRighty].setCaptionLabel("D_on").setColorCaptionLabel(0).setFont(font1);
-                     delayVal[propUpward] = 0.5;
+                     delayVal[propUpward] = 1.0;
                    }
                  }
                  if(time0Col == 1){
@@ -277,7 +277,7 @@ void funcPropSelec(){
                      snare[propUpward].setPan(1);
                  }
                  else if (instruments[propUpward].getLabel() == "H A T"){
-                     //hat[propUpward].setPan(1);
+                     hat[propUpward].setPan(1);
                      print("\n NEW VALUUUUUUUUUUUUUUUU");
                  }
                  else if (instruments[propUpward].getLabel() == "C L A P"){

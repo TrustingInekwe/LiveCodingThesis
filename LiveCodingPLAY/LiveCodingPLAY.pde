@@ -16,7 +16,7 @@ import ddf.minim.ugens.*;
 
 Minim minim;
 AudioOutput out;
-//AudioPlayer  kick1, snare clap, hat, tom;
+AudioPlayer  kick1, snare1, clap1, hat1, tom1;
 //AudioPlayer clap1;
 AudioPlayer [] snare = new AudioPlayer [8];
 AudioPlayer [] clap = new AudioPlayer [8];
@@ -27,8 +27,6 @@ Gain gainAudio;
 Pan panAudio;
 FilePlayer filePlayerKick1, filePlayerSnare1, filePlayerClap1, filePlayerHat1, filePlayerTom1;
 float panhat = 1.0;
-
-
 
 //snare = minim.loadFile("snare.wav");
 //kick1 = minim.loadFile("kiiiik.wav");
@@ -105,6 +103,7 @@ float[] freqBaseVal = new float [7];
 float[][] frNew = new float [8][7];
 int [] gainValues = new int [8];
 
+
 //======================================================================================initialization ends=========================================================================================================================================
 
 ToneInstrument[][] myNote;
@@ -119,27 +118,23 @@ class ToneInstrument implements Instrument
   ToneInstrument( float oscFrequency, int panValue, Waveform wave, float gainValue, float delayVal, int bitRes) //for synth
   {
     sineOsc = new Oscil( oscFrequency, gainValue, wave );
-    //osc frequency + 
     //ADSR(float maxAmp, float attTime, float decTime, float susLvl, float relTime)
     adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 );
     bitCrush = new BitCrush(bitRes, out.sampleRate());
-    myDelay = new Delay( delayVal, 0.1, true, true );
-    //adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 );  //NEED TO PATCH THIS UGEN (adsr) TO sineOsc AND pan
+    myDelay = new Delay( delayVal, 0.5, true, true );
     pan = new Pan(panValue);
     sineOsc.patch(adsr);
-    //adsr.patch(myDelay);
-    //gain.patch( adsr );
     if (bitRes == 0 && delayVal == 0.0) {
       adsr.patch(pan);
     } else if (bitRes != 0 && delayVal == 0.0) {
       adsr.patch(bitCrush); 
       bitCrush.patch(pan);
     } else if (bitRes == 0 && delayVal != 0.0) {
-      adsr.patch(myDelay); 
-      myDelay.patch(pan);
+      adsr.patch(pan); 
+      pan.patch(myDelay);
     } else if (bitRes != 0 && delayVal != 0.0) {
       adsr.patch(bitCrush); 
-      bitCrush.patch(myDelay); 
+      bitCrush.patch(pan); 
       myDelay.patch(pan);
     }
     //pan.patch( out );
@@ -685,7 +680,7 @@ public void draw() {
   fill(0);
   textSize(15);
   text("ENTER", 1305, height/2 + 160);
-  text("TAB", 1400, height/2 + 160);
+  text("TAB", 1395, height/2 + 160);
   
   //fill(255);
   //rect(550, height/2 + 175, 20, 30);
