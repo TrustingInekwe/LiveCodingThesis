@@ -535,7 +535,7 @@ public void draw() {
 
   
   
-  fill(255,255,255);
+  fill(#C62222);
   textSize(20);
   //text("CONFIGURATIONS", 1100, height/2 + 330);
   text("ARROW KEYS: to MOVE around grid | ENTER KEY: to SELECT | TAB KEY: to EXIT a section", 400, height/2 + 460);
@@ -543,12 +543,12 @@ public void draw() {
   //text("TAB KEY: to EXIT a section", 950, height/2 + 460);
   
   fill(#C6C6C6);
-  circle(1330, height/2 + 155, 70);
-  circle(1410, height/2 + 155, 70);
-  rect((width/2) + (width/5) + 170 , height/2 + 105, 20, 40);
-  rect((width/2) + (width/5) + 130 , height/2 + 145, 40, 20);
-  rect((width/2) + (width/5) + 190 , height/2 + 145, 40, 20);
-  rect((width/2) + (width/5) + 170 , height/2 + 165, 20, 40);
+  circle(1300, height/2 + 155, 70);
+  circle(1380, height/2 + 155, 70);
+  rect((width/2) + (width/5) + 145 , height/2 + 105, 20, 40);
+  rect((width/2) + (width/5) + 105 , height/2 + 145, 40, 20);
+  rect((width/2) + (width/5) + 165 , height/2 + 145, 40, 20);
+  rect((width/2) + (width/5) + 145 , height/2 + 165, 20, 40);
 
   if (entCircleL == 1) {
     fill (#1D7ABA);
@@ -608,8 +608,8 @@ public void draw() {
   text("C O N T R O L S", (width/2) + (width/5) + 103, height/2 + 19);
   fill(0);
   textSize(15);
-  text("ENTER", 1305, height/2 + 160);
-  text("TAB", 1395, height/2 + 160);
+  text("ENTER", 1275, height/2 + 160);
+  text("TAB", 1365, height/2 + 160);
   
   //fill(255);
   //rect(550, height/2 + 175, 20, 30);
