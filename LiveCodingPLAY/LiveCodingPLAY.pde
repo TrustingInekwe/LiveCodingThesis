@@ -533,46 +533,50 @@ public void draw() {
   }
   
 
-  
-  
-  fill(#C62222);
-  textSize(20);
-  //text("CONFIGURATIONS", 1100, height/2 + 330);
-  text("ARROW KEYS: to MOVE around grid | ENTER KEY: to SELECT | TAB KEY: to EXIT a section", 400, height/2 + 460);
-  //text("ENTER KEY: to SELECT |", 800, height/2 + 460);
-  //text("TAB KEY: to EXIT a section", 950, height/2 + 460);
+  //fill(255,255,255);
+  //rect( (width/2) + (width/5) + 103, height/2 + 30, 250, 100);
+  stroke(255);
+  line( (width/2) + (width/5) + 205, height/2 + 30, (width/2) + (width/5) + 205, height/2 + 100 );
+  line( (width/2) + (width/5) + 205, height/2 + 50, (width/2) + (width/5) + 205, height/2 + 50 );
+  noStroke();
+  fill(255);
+  //textSize(20);
+  ////text("CONFIGURATIONS", 1100, height/2 + 330);
+  text("ARROW KEYS   to MOVE around grid ",  (width/2) + (width/5) + 103, height/2 + 50);
+  text("ENTER KEY      to SELECT", (width/2) + (width/5) + 103, height/2 + 70);
+  text("TAB KEY          to EXIT a section", (width/2) + (width/5) + 103, height/2 + 90);
   
   fill(#C6C6C6);
-  circle(1300, height/2 + 155, 70);
-  circle(1380, height/2 + 155, 70);
-  rect((width/2) + (width/5) + 145 , height/2 + 105, 20, 40);
-  rect((width/2) + (width/5) + 105 , height/2 + 145, 40, 20);
-  rect((width/2) + (width/5) + 165 , height/2 + 145, 40, 20);
-  rect((width/2) + (width/5) + 145 , height/2 + 165, 20, 40);
+  circle(1300, height/2 + 210, 70);
+  circle(1380, height/2 + 210, 70);
+  rect((width/2) + (width/5) + 145 , height/2 + 160, 20, 40);
+  rect((width/2) + (width/5) + 105 , height/2 + 200, 40, 20);
+  rect((width/2) + (width/5) + 165 , height/2 + 200, 40, 20);
+  rect((width/2) + (width/5) + 145 , height/2 + 220, 20, 40);
 
   if (entCircleL == 1) {
     fill (#1D7ABA);
-    circle(1330, height/2 + 155, 70);
+    circle(1300, height/2 + 155, 70);
   }
   if (entCircleR == 1) {
     fill (#1D7ABA);
-    circle(1410, height/2 + 155, 70);
+    circle(1380, height/2 + 155, 70);
   }
   if (entUp == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 170, height/2 + 105, 20, 40);
+    rect((width/2) + (width/5) + 145, height/2 + 105, 20, 40);
   }
   if (entLeft == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 130, height/2 + 145, 40, 20);
+    rect((width/2) + (width/5) + 105, height/2 + 145, 40, 20);
   }
   if (entRight == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 190, height/2 + 145, 40, 20);
+    rect((width/2) + (width/5) + 165, height/2 + 145, 40, 20);
   }
   if (entDown == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 170, height/2 + 170, 20, 40);
+    rect((width/2) + (width/5) + 145, height/2 + 165, 20, 40);
   }
 
   entCircleL = 0;
@@ -585,13 +589,13 @@ public void draw() {
   
    //========================================================================================== Pattern Tag Text ========================================================================================================
   if (synthSel == 1) {
-    fill(#1E64B6);
-    rect(910, height/2 , 220, 25);
+    fill(#645605);
+    rect(890, height/2 , 240, 25);
     fill(250);
     textSize(15);
     text("SELECT NOTE", 920, height/2 + 20);
     fill(#FFED87);
-    rect(910, height/2 + 35, 220, 300 );
+    rect(890, height/2 + 35, 240, 295 );
   }    
   fill(250);
   textSize(15);
@@ -608,8 +612,8 @@ public void draw() {
   text("C O N T R O L S", (width/2) + (width/5) + 103, height/2 + 19);
   fill(0);
   textSize(15);
-  text("ENTER", 1275, height/2 + 160);
-  text("TAB", 1365, height/2 + 160);
+  text("ENTER", 1275, height/2 + 215);
+  text("TAB", 1365, height/2 + 215);
   
   //fill(255);
   //rect(550, height/2 + 175, 20, 30);
