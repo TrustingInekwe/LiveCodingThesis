@@ -25,20 +25,7 @@ AudioPlayer [] tom = new AudioPlayer [8];
 
 Gain gainAudio;
 Pan panAudio;
-FilePlayer filePlayerKick1, filePlayerSnare1, filePlayerClap1, filePlayerHat1, filePlayerTom1;
 float panhat = 1.0;
-
-//snare = minim.loadFile("snare.wav");
-//kick1 = minim.loadFile("kiiiik.wav");
-//clap = minim.loadFile("707-clap.wav");
-//hat = minim.loadFile("massive-hi-hat-8.wav");
-//tom = minim.loadFile("808-tom.wav");
-
-String snare11 = "snare.wav";
-String kick11 = "kiiiik.wav";
-String  clap11 = "707-clap.wav";
-String  hat11 = "massive-hi-hat-8.wav";
-//String  tom1 = "808-tom.wav";
 
 //=================================================================================initialization begins=========================================================================================================================================
 
@@ -196,18 +183,9 @@ public void setup() {
   out = minim.getLineOut( Minim.STEREO, 2048 );
 
   cp5 = new ControlP5(this);
-  myNote = new ToneInstrument[8][8];
-  
-   ///// this opens the file and puts it in the "play" state.                           
-  //filePlayerKick1 = new FilePlayer( minim.loadFileStream(kick11) );                           
-  //filePlayerSnare1 = new FilePlayer( minim.loadFileStream(snare11) );                           
-  //filePlayerHat1 = new FilePlayer( minim.loadFileStream(hat11) );                           
-  //filePlayerClap1 = new FilePlayer( minim.loadFileStream(clap11) ); 
+  myNote = new ToneInstrument[8][8]; 
 
   gainAudio = new Gain(-5.f);
-    //out = minim.getLineOut();
-    //filePlayerKick1.patch(gainAudio).patch(out);
-    //filePlayerSnare1.patch(gainAudio).patch(out);
     
   for(int i = 0; i < 8; i++){
     snare[i] = minim.loadFile("snare.wav");
@@ -232,8 +210,6 @@ public void setup() {
   clap1.setGain(-20);
   hat1.setGain(-20);
   snare1.setGain(-20);
-  
-  //clap1.setPan(-1);
   //========================================================================================= Synth Values INITIALIZATION =========================================================================================================================================  
   freqBaseVal[0] = 130.81;
   freqBaseVal[1] = 146.83;
@@ -324,7 +300,6 @@ public void setup() {
 
 
   //=========================================================================================INSTRUMENT SECTION=========================================================================================================================================
-
   k0 = cp5.addButton("KICK" +0).setPosition(125, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   sn0 = cp5.addButton("SNARE" +0).setPosition(253, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   h0 = cp5.addButton("HAT"+0).setPosition(380, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
@@ -462,18 +437,6 @@ public void draw() {
       }
       rect(b + 25, 35, 1010, 35);
       noStroke();
-    //}
-    //if (righty == 0){
-    //  fill(#C62222);
-    //  int passedMillis = millis() - time; // calculates passed milliseconds
-    //  if(passedMillis >= 315){
-    //      time = millis();
-    //      fill(#000000);
-    //  }
-    //  //rect(515, 40, 640, 25);
-    //  rect(510, 35, 650, 35);
-    //  noStroke();
-    //}
   }
   
     if(leave == 1){
@@ -550,10 +513,6 @@ public void draw() {
       }
     }
   }
-  //if (righty > -1 && righty < 8){
-  //  print("\ndecision[upward][righty] ==" +decision[upward][righty]);
-  //}
-//print("\npropHighlight == "+ propHighlight);
   if (propHighlight == 1) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
       property0();
