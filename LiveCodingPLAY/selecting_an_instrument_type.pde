@@ -1,23 +1,3 @@
-//if (decision[f][g] == 1 && instruments[f].getLabel() == "K I C K") {
-//          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("K").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
-//          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
-//        }
-//        if (decision[f][g] == 1 && instruments[f].getLabel() == "S N A R E") {
-//          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("S").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
-//          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
-//        }
-//        if (decision[f][g] == 1 && instruments[f].getLabel() == "H A T") {
-//          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("H").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
-//          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
-//        }
-//        if (decision[f][g] == 1 && instruments[f].getLabel() == "C L A P") {
-//          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("C").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
-//          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
-//        }
-//        if (decision[f][g] == 1 && instruments[f].getLabel() == "S Y N T H") {
-//          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setColorBackground( color(255, 255, 0) );
-//        }
-
 void selectInstrument(){
   if(patList2 == 0){
     if(instSelect[upward] == 1){

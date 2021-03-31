@@ -16,103 +16,67 @@ void movingAround() {
         cp5.get(controlP5.Button.class, "patternsArray" + (upward-1) + l).setColorBackground(color(#ffffff));
       }
     }
-  // for (int j = -1; j < 8; i++){
-  // for (int i = -1; i < 8; i++){
-  //  if (righty == i) {
-  //    if(righty == -1){
-  //      if (righty == -1) {
-  //        if ( entVal_instrument == 2 && highlight == 1 ) {
-  //              patList2 = 0;
-  //              instSelect[upward] = 1;
-  //            } else {
-  //              cp5.get(controlP5.Button.class, "instruments" + upward).setColorBackground( color(#87CEFF) );
-  //              cp5.get(controlP5.Button.class, "patternsArray" + (upward) + (righty+1)).setColorBackground( color(#ffffff) );
-  //              for (int h = 0; h < 400; h += 50){
-  //                int j = h/50;
-  //                if(upward == j){
-                    
-  //                  fill(#C62222);
-  //                  rect(125, h + 70, 370, 40);
-                    
-  //                }
-  //              }
-  //            }
-  //          }
-  //    }
-  //    if (righty == 0) {
-  //      instSelect[upward] = 0;
-  //      if (entVal_pattern == 1 && highlight == 1) {
-  //            if (instruments[upward].getLabel() == "S Y N T H") {
-  //                if ( synthSel == 1) {
-  //                  notes();
-  //                }
-  //            } 
-  //            else {
-  //                if (decision[upward][righty] == 1) {
-  //                  decision[upward][righty] = 0;
-  //                } else{
-  //                  decision[upward][righty] = 1;
-  //                }
-  //                entVal_pattern = 0;
-  //                print("\ndecision[upward][righty] =="+ decision[upward][righty]);
-  //            }
-  //      } 
-  //      else {
-  //        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-  //        for (int h = 0; h < 400; h += 50){
-  //          int j = h/50;
-  //          if(upward == j){
-              
-  //            ////if(decision[upward][righty] == 1){
-  //            //  fill(0,255,0);
-  //            //  rect(500, h + 70, 80, 40);
-  //            //}
-  //            //else{
-  //            fill(#C62222);
-  //            rect(500, h + 70, 80, 40);
-  //            //}
-  //          }
-  //        }
-  //      }
-  //    }
-     
-     
-     
-  //  }
-  //}
     
     if (righty == -1) {
+      for (int h = 0; h < 400; h += 50){
+          int j = h/50;
+          if(upward == j){
+            fill(#C62222);
+            rect(125, h + 70, 370, 40);
+          }
+        }
+        
       if ( entVal_instrument == 2 && highlight == 1 ) {
         patList2 = 0;
-        instSelect[upward] = 1;
+        instSelect[upward] = 1;    
       } else {
         cp5.get(controlP5.Button.class, "instruments" + upward).setColorBackground( color(#87CEFF) );
         cp5.get(controlP5.Button.class, "patternsArray" + (upward) + (righty+1)).setColorBackground( color(#ffffff) );
         for (int h = 0; h < 400; h += 50){
           int j = h/50;
           if(upward == j){
-            
-            
+            if ( entVal_instrument != 2){
             fill(#C62222);
+                int passedMillis = millis() - time3; // calculates passed milliseconds
+                if(passedMillis >= 315){
+                    time3 = millis();
+                  fill(#000000);
+                }
             rect(125, h + 70, 370, 40);
+            }
             
           }
         }
       }
     }
-   
-    if (righty == 0) {
+    
+   for(int i = 0; i < 8; i++){
+    if (righty == i) {
       instSelect[upward] = 0;
       if (entVal_pattern == 1 && highlight == 1) {
-            if (instruments[upward].getLabel() == "S Y N T H") {
-                if ( synthSel == 1) {
-                  notes();
+        if (instruments[upward].getLabel() == "S Y N T H") {
+          if ( synthSel == 1) {
+            notes();
+            for (int h = 0; h < 400; h += 50){
+              int j = h/50;
+              if(upward == j){
+                fill(#C62222);
+                int passedMillis = millis() - time; // calculates passed milliseconds
+                if(passedMillis >= 315){
+                    time = millis();
+                  fill(#000000);
                 }
-            } 
+                rect(500 + i*80, h + 70, 80, 40);
+                //}
+              }
+            }
+          }
+        } 
             else {
                 if (decision[upward][righty] == 1) {
                   decision[upward][righty] = 0;
-                } else{
+                  cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setCaptionLabel("");
+                } else if (instruments[upward].getLabel() != ""){
                   decision[upward][righty] = 1;
                 }
                 entVal_pattern = 0;
@@ -120,7 +84,9 @@ void movingAround() {
             }
       } 
       else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
+        if (instruments[upward].getLabel() != "S Y N T H"){
+          cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
+        }
         for (int h = 0; h < 400; h += 50){
           int j = h/50;
           if(upward == j){
@@ -130,217 +96,12 @@ void movingAround() {
                 time = millis();
               fill(#000000);
             }
-            rect(500, h + 70, 80, 40);
+            rect(500 + i*80, h + 70, 80, 40);
             //}
           }
         }
       }
     }
-  
-    
-    if (righty == 1) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            currentNotePosition = 1;   
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 2) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 2*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 3) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 3*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 4) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 4*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 5) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 5*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 6) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 6*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
-    if (righty == 7) {
-      if (entVal_pattern == 1 && highlight == 1) {
-        if (instruments[upward].getLabel() == "S Y N T H") {
-          if ( synthSel == 1) {
-            notes();
-          }
-        } else {
-          if (decision[upward][righty] == 1) {
-            decision[upward][righty] = 0;
-          } else
-            decision[upward][righty] = 1;
-          entVal_pattern = 0;
-        }
-      } else {
-        cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(#ffffff) );
-        for (int h = 0; h < 400; h += 50){
-          int j = h/50;
-          if(upward == j){
-            fill(#C62222);
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time = millis();
-              fill(#000000);
-            }
-            rect(500 + 7*80, h + 70, 80, 40);
-          }
-        }
-      }
-    }
+   }
   }
 }

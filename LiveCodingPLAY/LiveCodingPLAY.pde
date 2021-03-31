@@ -89,6 +89,7 @@ int propHighlight = 0, instPropRighty = 0, instPropUpward = 0, propcurrentPositi
 int patList1 = 0, patList2 = 0, decide = 0;
 int time = millis();
 int time2 = millis();
+int time3 = millis();
 int FunctionBlinker = 0;
 
 float[] freqBaseVal = new float [7];
@@ -526,7 +527,7 @@ public void draw() {
     playSound(run);
   }
 
-
+ 
   selectInstrument(); //selecting an Instrument
   if (decide == 1) {
     for ( int f = 0; f < 8; f++) {
@@ -547,13 +548,17 @@ public void draw() {
           cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("C").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
           //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
-        if (decision[f][g] == 1 && instruments[f].getLabel() == "S Y N T H") {
-          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setColorBackground( color(255, 255, 0) );
-        }
+        //if (instList[f][g] == 1 && instruments[f].getLabel() == "S Y N T H") {
+        //  cp5.get(controlP5.Button.class, "patternsArray" + f + g).setColorBackground( color(255, 255, 0) );
+        //  print("it has been set");
+        //}
       }
     }
   }
-print("\npropHighlight == "+ propHighlight);
+  if (righty > -1 && righty < 8){
+    print("\ndecision[upward][righty] ==" +decision[upward][righty]);
+  }
+//print("\npropHighlight == "+ propHighlight);
   if (propHighlight == 1) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
       property0();
@@ -1156,32 +1161,33 @@ void notesCaptionHide0(){
      if(righty == i){
        if(notes0Col == 0){
          if (notes0Row == 0){
-           patternsArray[upward][righty].setCaptionLabel("1").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("1").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
+           //cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 1){
-           patternsArray[upward][righty].setCaptionLabel("2").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("2").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 2){
-           patternsArray[upward][righty].setCaptionLabel("3").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("3").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
        }
        if(notes0Col == 1){
          if (notes0Row == 0){
-           patternsArray[upward][righty].setCaptionLabel("4").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("4").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 1){
-           patternsArray[upward][righty].setCaptionLabel("5").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("5").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 2){
-           patternsArray[upward][righty].setCaptionLabel("6").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("6").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
        }
        if(notes0Col == 2){
          if (notes0Row == 0){
-         patternsArray[upward][righty].setCaptionLabel("7").setFont(font2).setColorCaptionLabel(0);
+         patternsArray[upward][righty].setCaptionLabel("7").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 1){
-           patternsArray[upward][righty].setCaptionLabel("").setFont(font2).setColorCaptionLabel(0);
+           patternsArray[upward][righty].setCaptionLabel("").setFont(font2).setColorCaptionLabel(0).setColorBackground(#ffffff);
          }
        }
      }
