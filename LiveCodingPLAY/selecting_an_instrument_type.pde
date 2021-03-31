@@ -25,7 +25,12 @@ void selectInstrument(){
       if(instUpward == 0){
         //cp5.get(controlP5.Button.class, "SNARE" + 0).setColorBackground( #e0115f);
         if(intRighty == 0){
-         fill(#e0115f);
+         fill(#C62222);
+          int passedMillis = millis() - time; // calculates passed milliseconds
+          if(passedMillis >= 315){
+              time = millis();
+            fill(#000000);
+          }
          rect(120, height/2 + 30, 125, 95);
           //print(intRighty+"..."+intRighty);
           if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 0){
@@ -41,7 +46,12 @@ void selectInstrument(){
              }
         }
         if(intRighty == 1){
-          fill(#e0115f);
+          fill(#C62222);
+          int passedMillis = millis() - time; // calculates passed milliseconds
+          if(passedMillis >= 315){
+              time = millis();
+            fill(#000000);
+          }
          rect(248, height/2 + 30, 125, 95);
           if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 1){
             //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S N A R E").setColorCaptionLabel(255).setFont(font2);
@@ -56,7 +66,12 @@ void selectInstrument(){
           }
         }
           if(intRighty == 2){
-            fill(#e0115f);
+            fill(#C62222);
+          int passedMillis = millis() - time; // calculates passed milliseconds
+          if(passedMillis >= 315){
+              time = millis();
+            fill(#000000);
+          }
              rect(375, height/2 + 30, 125, 95);
             if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 2){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("H A T").setColorCaptionLabel(255).setFont(font2);
@@ -74,7 +89,12 @@ void selectInstrument(){
         //print
         if(instUpward == 1){
           if(intRighty == 0){
-            fill(#e0115f);
+            fill(#C62222);
+          int passedMillis = millis() - time; // calculates passed milliseconds
+          if(passedMillis >= 315){
+              time = millis();
+            fill(#000000);
+          }
              rect(120, height/2 + 165, 125, 95);
             if(entVal_instrument == 2 && highlight == 2 && instUpward == 1 && intRighty == 0){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S Y N T H").setColorCaptionLabel(255).setFont(font2);
@@ -89,7 +109,12 @@ void selectInstrument(){
               }
           }
           if(intRighty == 1){
-            fill(#e0115f);
+            fill(#C62222);
+          int passedMillis = millis() - time; // calculates passed milliseconds
+          if(passedMillis >= 315){
+              time = millis();
+            fill(#000000);
+          }
          rect(248, height/2 + 165, 125, 95);
             if(entVal_instrument == 2 && highlight == 2 && instUpward == 1 && intRighty == 1){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("C L A P").setColorCaptionLabel(255).setFont(font2);

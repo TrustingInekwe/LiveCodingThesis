@@ -92,6 +92,7 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             
+            
             fill(#C62222);
             rect(125, h + 70, 370, 40);
             
@@ -123,13 +124,12 @@ void movingAround() {
         for (int h = 0; h < 400; h += 50){
           int j = h/50;
           if(upward == j){
-            
-            ////if(decision[upward][righty] == 1){
-            //  fill(0,255,0);
-            //  rect(500, h + 70, 80, 40);
-            //}
-            //else{
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500, h + 70, 80, 40);
             //}
           }
@@ -158,6 +158,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 80, h + 70, 80, 40);
           }
         }
@@ -182,6 +187,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 2*80, h + 70, 80, 40);
           }
         }
@@ -206,6 +216,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 3*80, h + 70, 80, 40);
           }
         }
@@ -230,6 +245,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 4*80, h + 70, 80, 40);
           }
         }
@@ -254,6 +274,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 5*80, h + 70, 80, 40);
           }
         }
@@ -278,6 +303,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 6*80, h + 70, 80, 40);
           }
         }
@@ -302,6 +332,11 @@ void movingAround() {
           int j = h/50;
           if(upward == j){
             fill(#C62222);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
             rect(500 + 7*80, h + 70, 80, 40);
           }
         }

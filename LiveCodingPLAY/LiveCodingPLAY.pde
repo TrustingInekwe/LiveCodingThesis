@@ -88,6 +88,7 @@ int currentNotePosition, propLeave = 0, propRighty = 0, propUpward = 0;
 int propHighlight = 0, instPropRighty = 0, instPropUpward = 0, propcurrentPositionX = 0, propcurrentPositionY = 0;
 int patList1 = 0, patList2 = 0, decide = 0;
 int time = millis();
+int FunctionBlinker = 0;
 
 float[] freqBaseVal = new float [7];
 //130.81, fr10 = 146.83, fr20 = 164.81, fr30 = 174.61, fr40 = 196.00, fr50 = 220.00, fr60 = 246.94;
@@ -211,7 +212,7 @@ void chooseOutput(){
 public void setup() {
   size(1500, 1000);
   frameRate(4);
-  font1 = createFont("SansSerif-30.vlw", 10);
+  font1 = createFont("NewPeninimMT-48.vlw", 10);
   font2 = createFont("SansSerif-30.vlw", 20);
   font3 = createFont("SansSerif-30.vlw", 13);
   imgKICK = loadImage("KICK.png");
@@ -525,7 +526,7 @@ public void draw() {
   }
 
 
-  selectInstrument();
+  selectInstrument(); //selecting an Instrument
   if (decide == 1) {
     for ( int f = 0; f < 8; f++) {
       for (int g = 0; g < 8; g++) {
@@ -832,6 +833,7 @@ void keyPressed() {
 
     if (redhighlight == 2 && propHighlight == 3) {
       funcPropSelec();
+      FunctionBlinker = 1;
     }
     if (redhighlight == 2 && (propHighlight == 2)) {
       propHighlight++;
@@ -1274,6 +1276,11 @@ void property0() {
         int j = h/50;
         if(propUpward == j){
           fill(color(#C62222));
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
           rect((width/2) + (width/5) + 95 + (i*70), h + 70, 60, 40);
         }
       }
@@ -1300,7 +1307,12 @@ void propFunction0() {
         int j = h/50;
         if(instPropUpward == j){
           fill(color(#C62222));
-          rect(497 + (i*130), height/2 + 30 + (j*173), 125, 132);
+            int passedMillis = millis() - time; // calculates passed milliseconds
+            if(passedMillis >= 315){
+                time = millis();
+              fill(#000000);
+            }
+          rect(498 + (i*130), height/2 + 30 + (j*173), 125, 132);
         }
       }
     }

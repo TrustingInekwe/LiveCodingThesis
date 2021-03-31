@@ -16,7 +16,7 @@ void propFuncSel0() {
         int j = h/50;
         if(instPropUpward == j){
           fill(color(#C62222));
-          rect(513 + (i*130), height/2 + 30 + (j*173), 125, 132);
+          rect(497 + (i*130), height/2 + 30 + (j*173), 125, 132);
         }
       }
     }
