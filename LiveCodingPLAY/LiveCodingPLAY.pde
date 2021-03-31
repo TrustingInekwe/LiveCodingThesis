@@ -328,19 +328,19 @@ public void setup() {
 
   //=========================================================================================INSTRUMENT SECTION=========================================================================================================================================
 
-  k0 = cp5.addButton("KICK" +0).setPosition(125, height/2 + 35).setSize(120, 85).setColorBackground(#0B1D28).setCaptionLabel("");
-  sn0 = cp5.addButton("SNARE" +0).setPosition(253, height/2 + 35).setSize(120, 85).setColorBackground(#0B1D28).setCaptionLabel("");
-  h0 = cp5.addButton("HAT"+0).setPosition(380, height/2 + 35).setSize(120, 85).setColorBackground(#0B1D28).setCaptionLabel("");
-  sy0 = cp5.addButton("SYNTH" +0).setPosition(125, height/2 + 170).setSize(120, 85).setColorBackground(#0B1D28).setCaptionLabel("");
-  c0 = cp5.addButton("CLAP" +0).setPosition(253, height/2 + 170).setSize(120, 85).setColorBackground(#0B1D28).setCaptionLabel("");
+  k0 = cp5.addButton("KICK" +0).setPosition(125, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
+  sn0 = cp5.addButton("SNARE" +0).setPosition(253, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
+  h0 = cp5.addButton("HAT"+0).setPosition(380, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
+  sy0 = cp5.addButton("SYNTH" +0).setPosition(125, height/2 + 170).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
+  c0 = cp5.addButton("CLAP" +0).setPosition(253, height/2 + 170).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   //e0 = cp5.addButton("ENVELOPES" +0).setPosition(243, height/2 + 230).setSize(95, 80).setColorBackground(#0B1D28).setCaptionLabel("");
   
-  t0 = cp5.addButton("GAIN" +0).setPosition(520, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
-  tr0 = cp5.addButton("TRANSPOSE" +0).setPosition(650, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
-  r0 = cp5.addButton("EFFECTS"+0).setPosition(780, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
-  a0 = cp5.addButton("WAVE" +0).setPosition(520, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
-  de0 = cp5.addButton("DELETE" +0).setPosition(650, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
-  p0 = cp5.addButton("PAN" +0).setPosition(780, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  t0 = cp5.addButton("GAIN" +0).setPosition(505, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  tr0 = cp5.addButton("TRANSPOSE" +0).setPosition(635, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  r0 = cp5.addButton("EFFECTS"+0).setPosition(765, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  a0 = cp5.addButton("WAVE" +0).setPosition(505, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  de0 = cp5.addButton("DELETE" +0).setPosition(635, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
+  p0 = cp5.addButton("PAN" +0).setPosition(765, height/2 + 210).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
 }
 
 //========================================================================================== DRAW BEGINS ========================================================================================================
@@ -511,7 +511,7 @@ public void draw() {
   fill(#645605);
   rect((width/2) + (width/5) + 100, 40, 260, 25);
   fill(#645605);
-  rect(520, height/2 , 370, 25);
+  rect(505, height/2 , 370, 25);
   //================================================================================LOOPING THE GRIDS================================================================================
   if (playALL == 0) { 
     int k = 0;
@@ -637,45 +637,53 @@ public void draw() {
   text("INSTRUMENT", b + 33, a - 15);
   fill(250);
   textSize(15);
-  text("PATTERN ARRAY", 515, a - 15);
+  text("PATTERN ARRAY", 505, a - 15);
   textSize(15);
-  text("FUNCTIONS ARRAY", (width/2) + (width/5) + 110 , a - 15);
+  text("FUNCTIONS ARRAY", (width/2) + (width/5) + 103 , a - 15);
   text("INSTRUMENT TYPE", b+33, (height/2) + 19);
-  text("FUNCTIONS LIST", 530, (height/2) + 19);
+  text("FUNCTIONS LIST", 507, (height/2) + 19);
   fill(255);
   textSize(15);
-  text("C O N T R O L S", (width/2) + (width/5) + 110, height/2 + 19);
+  text("C O N T R O L S", (width/2) + (width/5) + 103, height/2 + 19);
   fill(0);
   textSize(15);
   text("ENTER", 1305, height/2 + 160);
   text("TAB", 1400, height/2 + 160);
   
+  //fill(255);
+  //rect(550, height/2 + 175, 20, 30);
   fill(255);
   textSize(20);
-  text("GAIN", 550, height/2 + 180);
+  text("GAIN", 530, height/2 + 180);
   textSize(13);
-  text("(change volume)", 520, height/2 + 195); 
+  text("(change volume)", 510, height/2 + 195); 
   textSize(20);
-  text("TRANSPOSE", 650, height/2 + 180);
+  text("TRANSPOSE", 635, height/2 + 180);
   textSize(13);
-  text("(change synth pitch)", 640, height/2 + 195); 
+  text("(change synth pitch)", 630, height/2 + 195); 
   textSize(20);
-  text("EFFECTS", 790, height/2 + 180);
+  text("EFFECTS", 780, height/2 + 180);
   textSize(13);
-  text("(change sound)", 780, height/2 + 195); 
+  text("(change sound)", 770, height/2 + 195); 
   textSize(20);
-  text("WAVE", 550, height/2 + 360);
+  text("WAVE", 530, height/2 + 360);
   textSize(13);
-  text("(choose wave)", 535, height/2 + 375); 
+  text("(choose wave)", 515, height/2 + 375); 
   textSize(20);
-  text("DELETE", 660, height/2 + 360);
+  text("DELETE", 645, height/2 + 360);
   textSize(13);
-  text("(remove option)", 650, height/2 + 375); 
+  text("(remove option)", 635, height/2 + 375); 
   textSize(20);
-  text("PAN", 820, height/2 + 360);
+  text("PAN", 790, height/2 + 360);
   textSize(13);
-  text("(change sound direction)", 770, height/2 + 375); 
+  text("(change sound direction)", 760, height/2 + 375); 
   
+  //fill(255);
+  //rect(150, height/2 + 120, 60, 30);
+  //rect(280, height/2 + 120, 60, 30);
+  //rect(410, height/2 + 120, 60, 30);
+  //rect(155, height/2 + 255, 60, 30);
+  //rect(280, height/2 + 255, 60, 30);
   fill(255);
   textSize(15);
   text("KICK", 160, height/2 + 140);
@@ -686,11 +694,11 @@ public void draw() {
   //text("ENVELOPES", 245, height/2 + 360);
   cp5.setAutoDraw(false); 
   cp5.draw();
-  image(imgKICK, 130, height/2 + 40, 110, 75);
-  image(imgSNARE, 258, height/2 + 40, 110, 75);
-  image(imgHAT, 385, height/2 + 40, 110, 75);
-  image(imgSYNTH, 130, height/2 + 175, 110, 75);
-  image(imgCLAP, 258, height/2 + 175, 110, 75);
+  image(imgKICK, 130, height/2 + 40, 105, 75);
+  image(imgSNARE, 258, height/2 + 40, 105, 75);
+  image(imgHAT, 385, height/2 + 40, 105, 75);
+  image(imgSYNTH, 130, height/2 + 175, 105, 75);
+  image(imgCLAP, 258, height/2 + 175, 105, 75);
   //image (imgEnvelope, 248, height/2 + 235, 84, 69);
 }
 //========================================================================================== DRAW ENDS ========================================================================================================
@@ -874,13 +882,13 @@ void keyPressed() {
       if (entVal_instrument == 2 && highlight == 2 && instUpward > 0 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4) ) {
         instUpward--;
         if(intRighty == 0){
-          chooseOutput();
-          filePlayerKick1.rewind();
-          filePlayerKick1.play();
+          //chooseOutput();
+          //filePlayerKick1.rewind();
+          //filePlayerKick1.play();
         }
         if(intRighty == 1){
-          filePlayerSnare1.rewind();
-          filePlayerSnare1.play();
+          //filePlayerSnare1.rewind();
+          //filePlayerSnare1.play();
         }
       }
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1  && notes0Col <= 2 && notes0Col >= 1 && (redhighlight == 1 || redhighlight == 4)) {
@@ -1000,9 +1008,9 @@ void keyPressed() {
           intRighty++;
           //intRighty = constrain (intRighty, 0, 2);
           if (intRighty == 1){
-            chooseOutput();
-            filePlayerSnare1.rewind();
-            filePlayerSnare1.play();
+            //chooseOutput();
+            //filePlayerSnare1.rewind();
+            //filePlayerSnare1.play();
           }
           if (intRighty == 2){
             chooseOutput();
@@ -1013,7 +1021,7 @@ void keyPressed() {
         if(instUpward == 1){
           intRighty++;
           if (intRighty == 1){
-            chooseOutput();
+            //chooseOutput();
             //filePlayerClap1.rewind();
             //filePlayerClap1.play();
           }
@@ -1077,19 +1085,19 @@ void keyPressed() {
         intRighty--;
         if(instUpward == 0){
           if (intRighty == 0){
-            chooseOutput();
-            filePlayerKick1.rewind();
-            filePlayerKick1.play();
+            //chooseOutput();
+            //filePlayerKick1.rewind();
+            //filePlayerKick1.play();
           }
           if (intRighty == 1){
-            chooseOutput();
-            filePlayerSnare1.rewind();
-            filePlayerSnare1.play();
+            //chooseOutput();
+            //filePlayerSnare1.rewind();
+            //filePlayerSnare1.play();
           }
         }
         if(instUpward == 1){
           if (intRighty == 1){
-            chooseOutput();
+            //chooseOutput();
             //filePlayerClap1.rewind();
             //filePlayerClap1.play();
           }
@@ -1258,6 +1266,8 @@ void playSound(int run){
 }
 
 void property0() {
+  
+  // property section
   for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -1270,6 +1280,7 @@ void property0() {
     }
   }
 }
+// property section after selecting
 void propFunction0() {
    for(int i = 0; i < 4; i++){
     if (propRighty == i){
@@ -1282,14 +1293,14 @@ void propFunction0() {
       }
     }
   }
-  
+  // lower property section
   for(int i = 0; i < 3; i++){
     if (instPropRighty == i){
       for (int h = 0; h < 100; h += 50){
         int j = h/50;
         if(instPropUpward == j){
           fill(color(#C62222));
-          rect(513 + (i*130), height/2 + 30 + (j*173), 125, 132);
+          rect(497 + (i*130), height/2 + 30 + (j*173), 125, 132);
         }
       }
     }
