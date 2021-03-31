@@ -29,12 +29,12 @@ void propFuncSel0() {
     //  fill(#1E64B6);
     //rect(910, height/2 , 220, 25);
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       
       //stroke(#AF69EF);
       //strokeWeight(15.0);
@@ -83,12 +83,12 @@ void propFuncSel0() {
 
     if (instPropRighty == 1) {
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       //notes0Row = 0, notes0Col = 0, time0Row = 0, time0Col = 0
       transpose0 = cp5.addRadioButton("transposeRadioButton2");
       transpose0.setPosition(930, height/2 + 80);
@@ -144,14 +144,15 @@ void propFuncSel0() {
         }
       }
     }
+    
     if (instPropRighty == 2) {
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       fill(0,0,255);
       textSize(15);
       text("Delay", 930, height/2 + 70);
@@ -191,12 +192,12 @@ void propFuncSel0() {
   if (instPropUpward == 1) {
     if (instPropRighty == 0) {
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       wave0 = cp5.addRadioButton("waveRadioButton4");
       wave0.setPosition(930, height/2 + 80);
       wave0.setSize(20, 20);
@@ -228,12 +229,12 @@ void propFuncSel0() {
     }      
     if (instPropRighty == 1) {
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       delete0 = cp5.addRadioButton("deleteRadioButton5");
       delete0.setPosition(930, height/2 + 80);
       delete0.setSize(20, 20);
@@ -256,12 +257,12 @@ void propFuncSel0() {
 
     if (instPropRighty == 2) {
       fill(#645605);
-      rect(910, height/2 , 220, 25);
+      rect(890, height/2 , 240, 25);
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
       fill(#FFED87);
-      rect(910, height/2 + 35, 220, 290 );
+      rect(890, height/2 + 35, 240, 295 );
       pan0 = cp5.addRadioButton("panRadioButton8");
       pan0.setPosition(930, height/2 + 80);
       pan0.setSize(20, 20);
