@@ -378,33 +378,33 @@ public void draw() {
   
   if(redhighlight == 2) {
     if (propHighlight == 0) {
-      fill(#C62222);
+      fill(#7EFFFF);
       int passedMillis = millis() - time; // calculates passed milliseconds
       if(passedMillis >= 315){
-          time = millis();
-        fill(#000000);
+        //  time = millis();
+        //fill(#000000);
       }
       //rect((width/2) + (width/5) + 130, 40, 260, 25);
       rect((width/2) + (width/5) + 95, 35, 270, 35);
       noStroke();
     }
     
-    if(propHighlight == 2) {
-        stroke(0, 255, 0);
-        strokeWeight(8.0);
-        strokeCap(ROUND);
-      int passedMillis = millis() - time; // calculates passed milliseconds
-      if(passedMillis >= 315){
-        float r1 = random(255);
-        float r2 = random(255);
-        float r3 = random(255);
-          time = millis();
-          stroke(r1, r2, r3);
-          strokeWeight(8.0);
-          strokeCap(ROUND);
-      }
-        noStroke();
-    }
+    //if(propHighlight == 2) {
+    //    stroke(0, 255, 0);
+    //    strokeWeight(8.0);
+    //    strokeCap(ROUND);
+    //  int passedMillis = millis() - time; // calculates passed milliseconds
+    //  if(passedMillis >= 315){
+    //    //float r1 = random(255);
+    //    //float r2 = random(255);
+    //    //float r3 = random(255);
+    //    //  time = millis();
+    //    //  stroke(r1, r2, r3);
+    //    //  strokeWeight(8.0);
+    //    //  strokeCap(ROUND);
+    //  }
+    //    noStroke();
+    //}
     if(propHighlight == 3) {
         stroke(0, 255, 0);
         strokeWeight(8.0);
@@ -429,11 +429,11 @@ public void draw() {
       }
     
     //if (righty == -1 || righty == 8){
-      fill(#C62222);
+      fill(#7EFFFF);
       int passedMillis = millis() - time; // calculates passed milliseconds
       if(passedMillis >= 315){
-          time = millis();
-          fill(#000000);
+          //time = millis();
+          //fill(#000000);
       }
       rect(b + 25, 35, 1010, 35);
       noStroke();
@@ -461,17 +461,17 @@ public void draw() {
   //fill(#1D7ABA);
   //rect(515, 40, 640, 25);
   fill(#1E64B6);
-  rect(b + 30, 40, 1000, 25);
+  rect(b + 30, 40, 1000, 25); //Pattern Array rectangle
   //fill(#0B1D28);
   //rect(b + 150, 43, 120, 20);
   fill(#1E64B6);
-  rect(b + 30, height/2 , 360, 25);
-  fill(#1E64B6);
-  rect((width/2) + (width/5) + 100, height/2 , 260, 25);
-  fill(#645605);
-  rect((width/2) + (width/5) + 100, 40, 260, 25);
-  fill(#645605);
-  rect(505, height/2 , 370, 25);
+  rect(b + 30, height/2 , 360, 25); //Instrument rectangle
+  fill(#665700);
+  rect((width/2) + (width/5) + 100, 40, 260, 25); //Functions array rectangle
+  fill(#665700);
+  rect((width/2) + (width/5) + 100, height/2 , 260, 25); //Control rectangle
+  fill(#665700);
+  rect(505, height/2 , 370, 25); //Functions List rectangle
   //================================================================================LOOPING THE GRIDS================================================================================
   if (playALL == 0) { 
     int k = 0;

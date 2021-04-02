@@ -3,7 +3,7 @@ void movingRectangles(int k){
     int j = 65 + h;
     if (j == 65) {
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540, 470, 15, 15);
     }
     else if(j == 66){
@@ -11,7 +11,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 1*80, 470, 15, 15);
     }
     else if(j == 67){
@@ -19,7 +19,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 1*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 2*80, 470, 15, 15);
     }
     else if(j == 68){
@@ -27,7 +27,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 2*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 3*80, 470, 15, 15);
     }
     else if(j == 69){
@@ -35,7 +35,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 3*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 4*80, 470, 15, 15);
     }
     else if(j == 70){
@@ -43,7 +43,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 4*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 5*80, 470, 15, 15);
     }
     else if(j == 71){
@@ -51,7 +51,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 5*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 6*80, 470, 15, 15);
     }
     else if(j == 72){
@@ -59,7 +59,7 @@ void movingRectangles(int k){
       fill(#1B3749);
       ellipse(540 + 6*80, 470, 15, 15);
       fill(0, 255, 255);
-      fill(#C62222);
+      fill(#7EFFFF);
       ellipse(540 + 7*80, 470, 15, 15);
     }        
  }
