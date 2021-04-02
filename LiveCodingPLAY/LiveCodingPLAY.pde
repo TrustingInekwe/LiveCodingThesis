@@ -8,7 +8,7 @@
  * @copyright
  * 
  */
-
+import static javax.swing.JOptionPane.*;
 import controlP5.*;
 
 import ddf.minim.*;
@@ -29,15 +29,15 @@ float panhat = 1.0;
 
 //=================================================================================initialization begins=========================================================================================================================================
 
-//Amplitude amp;
+ControlP5 cp5;
 
 PFont font1, font2, font3;
 
-RadioButton r1, r2, r3, w, time0, transpose0, notes0, pan0, effect0, wave0, delete0;
-ControlP5 cp5;
+RadioButton r1, r2, r3, w;
+RadioButton time0, transpose0, notes0, pan0, effect0, wave0, delete0;
 int val = 0, octave = 1, func = 0;
 Button i0, k0, sn0, h0, c0, sy0, e0, f0, play, pause;
-Button t0, tr0, r0, a0, de0, p0, instrument0, instrument1, instrument2, instrument3, instrument4, instrument5, instrument6, instrument7;
+Button t0, tr0, r0, a0, de0, p0;
 Button [][] patternsArray = new Button[8][8];
 Button [][] propertiesArray = new Button[8][8];
 Waveform [] disWave = new Waveform[8];
@@ -57,7 +57,6 @@ float attackTimePiano = 0.003;
 float sustainTimePiano = 0.004;
 float sustainLevelPiano = 0.3;
 float releaseTimePiano = 0.4;
-//PImage img[] = new PImage[4];
 PImage imgKICK, imgSNARE, imgHAT, imgCLAP, imgSYNTH, imgEnvelope;
 
 float attackTimeBass = 0.001;
@@ -69,7 +68,8 @@ float attackTimeDrum = 0.005;
 float sustainTimeDrum = 0.01;
 float sustainLevelDrum = 0.01;
 float releaseTimeDrum = 0.4;
-int a = 75, b = 100, c = b + 100, entCircleL = 0, entCircleR = 0, entLeft = 0, entRight = 0, entUp = 0, entDown = 0;
+int a = 75, b = 100, c = b + 100;
+int entCircleL = 0, entCircleR = 0, entLeft = 0, entRight = 0, entUp = 0, entDown = 0;
 int[] property0 = new int[8];
 int[] instSelect = new int[8];
 
@@ -86,7 +86,6 @@ int time3 = millis();
 int FunctionBlinker = 0;
 
 float[] freqBaseVal = new float [7];
-//130.81, fr10 = 146.83, fr20 = 164.81, fr30 = 174.61, fr40 = 196.00, fr50 = 220.00, fr60 = 246.94;
 float[][] frNew = new float [8][7];
 int [] gainValues = new int [8];
 int movingRectancglePattern = b + 30;
@@ -94,8 +93,6 @@ int movingRectancgleInstrument = b + 30;
 int movingRectancgleFunctionArray = 1100;
 int movingRectancgleFunctioList = 505;
 int speedOfMovingRectangle = 1;
-
-
 //======================================================================================initialization ends=========================================================================================================================================
 
 ToneInstrument[][] myNote;
@@ -142,32 +139,24 @@ class ToneInstrument implements Instrument
     pan = new Pan(panValue);
     myDelay1 = new Delay( delayVal, 0.1, true, true );
     sineOsc1.patch(adsr);
-    //adsr.patch(sineOsc);
-    //gain.patch( adsr );
     if (delayVal == 0.0) {
       adsr.patch(pan);
     } else {
       adsr.patch(myDelay1); 
       myDelay1.patch(pan);
     }
-
-    //pan.patch( out );
   }
 
   void noteOn( float dur )
   {
     pan.patch( out );
     adsr.noteOn();
-    //adsr1.noteOn();
-    //pan1.patch(out);
   }
   void noteOff()
   {
     pan.unpatch( out );
     //adsr.unpatchAfterRelease( out );
     adsr.noteOff();
-    //adsr1.noteOff();
-    //pan1.patch(out);
   }
 }
 
@@ -201,9 +190,6 @@ public void setup() {
   for(int i = 0; i < 8; i++){
     hat[i] = minim.loadFile("massive-hi-hat-8.wav");
   }  
-  //for(int i = 0; i < 8; i++){
-  //  tom[i] = minim.loadFile("808-tom.wav");
-  //}
   
   kick1 = minim.loadFile("kiiiik.wav");
   clap1 = minim.loadFile("707-clap.wav");
@@ -223,14 +209,12 @@ public void setup() {
   freqBaseVal[4] = 196.00;
   freqBaseVal[5] = 220.00;
   freqBaseVal[6] = 246.94;
-  //float[] fr = new float [7];
-  //0, fr1 = 0, fr2 = 0, fr3 = 0, fr4 = 0, fr5 = 0, fr6 = 0;
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 7; j++) {
       frNew[i][j] = freqBaseVal[j];
     }
   }
-  //========================================================================================= Instrument Selection INITIALIZATION =========================================================================================================================================  
+  //========================================================================================= Function List INITIALIZATION =========================================================================================================================================  
   for (int i = 0; i < 8; i++) {
     transVal[i] = 0.0;
   }
@@ -257,9 +241,6 @@ public void setup() {
     snare[i].setGain(-20);
     hat[i].setGain(-20);
   }
-  //for (int i = 0; i<8; i++) {
-  //  gainValues[i] = 0;
-  //}
   //========================================================================================= DECISION INITIALIZATION =========================================================================================================================================  
   for (int i = 0; i<8; i++) {
     for (int j = 0; j<8; j++) {
@@ -277,8 +258,6 @@ public void setup() {
       myNote[i][j] = new ToneInstrument(instList[i][j], panValue[i], disWave[i], gainValue[i], delayVal[i], bitRes[i]);
     }
   }
-
-
   //========================================================================================= INSTRUMENT DROPDOWNLIST ====================================================================================================================================
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
@@ -299,7 +278,7 @@ public void setup() {
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
     for (int j = 0; j < 4; j++) { 
-      propertiesArray[y][j] = cp5.addButton("propertiesArray" + y + j).setPosition((width/2) + (width/5) + 100 + j*70, a + m).setSize(50, 30).setCaptionLabel("").setColorBackground(#FFED87);
+      propertiesArray[y][j] = cp5.addButton("propertiesArray" + y + j).setPosition((width/2) + (width/5) + 100 + j*70, a + m).setSize(50, 30).setCaptionLabel("").setColorBackground(#FFAB28);
       //print("\npropertiesArray" + y + j);
     }
   }
@@ -383,9 +362,10 @@ public void draw() {
   text("A R R A Y 6:", 30, a + 320);
   text("A R R A Y 7:", 30, a + 370);
   
+  
   fill(#1E64B6);
   rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
-  fill(#3F3600);
+  fill(#9D6000);
   rect((width/2) + (width/5) + 100, 40, 260, 25); //Functions array rectangle
   //fill(#084C5C);
   //rect(b + 30, height/2 , 360, 25); //Instrument type rectangle
@@ -393,6 +373,13 @@ public void draw() {
   //rect((width/2) + (width/5) + 100, height/2 , 260, 25); //Control rectangle
   //fill(#181501);
   //rect(505, height/2 , 370, 25); //Functions List rectangle
+  
+  
+  //stroke(255);
+  ////line( (width/2) + (width/5) + 205, height/2 + 30, (width/2) + (width/5) + 205, height/2 + 100 );
+  //line( (width/2) + (width/5) + 90, 70, (width/2) + (width/5) + 90, height/2 + 50 );
+  //noStroke();
+  
   
   if(redhighlight == 1 || redhighlight == 4){ 
     if(entVal_instrument == 0){
@@ -422,7 +409,7 @@ public void draw() {
             time = millis();
             //float r = random(30, 54);
           //fill(63, r, 0);
-          fill(#87770F);
+          fill(#E7AD54);
         }
       rect((width/2) + (width/5) + 100, 40, 260, 25);
       //print("\n distance" + movingRectancgleFunctionArray);
@@ -502,6 +489,7 @@ public void draw() {
   fill(255);
   //textSize(20);
   ////text("CONFIGURATIONS", 1100, height/2 + 330);
+  textFont(font1);
   text("ARROW KEYS   to MOVE around grid ",  (width/2) + (width/5) + 103, height/2 + 50);
   text("ENTER KEY      to SELECT", (width/2) + (width/5) + 103, height/2 + 70);
   text("TAB KEY          to EXIT a section", (width/2) + (width/5) + 103, height/2 + 90);
@@ -549,12 +537,12 @@ public void draw() {
   
    //========================================================================================== Pattern Tag Text ========================================================================================================
   if (synthSel == 1) {
-    fill(#645605);
-    rect(890, height/2 , 240, 25);
-    fill(250);
+    //fill(#645605);
+    //rect(890, height/2 , 240, 25);
+    fill(255);
     textSize(15);
-    text("SELECT NOTE", 920, height/2 + 20);
-    fill(#FFED87);
+    text("SELECT NOTE", 890, height/2 + 20);
+    fill(#FFCD80);
     rect(890, height/2 + 35, 240, 295 );
   }    
   fill(250);
@@ -680,18 +668,25 @@ void keyPressed() {
           time0.hide();
         }
         if (instPropRighty == 1) {
+          if (instruments[propUpward].getLabel() == "S Y N T H"){
+            transpose0.hide();
+          }
           propHighlight--;
-          transpose0.hide();
+          
         }
         if (instPropRighty == 2) {
           propHighlight--;
-          effect0.hide();
+          if (instruments[propUpward].getLabel() == "S Y N T H"){
+            effect0.hide();
+          }
         }
       }
       if (instPropUpward == 1) {
         if (instPropRighty == 0) {
           propHighlight--;
-          wave0.hide();
+          if (instruments[propUpward].getLabel() == "S Y N T H"){
+            wave0.hide();
+          }
         }
         if (instPropRighty == 1) {
           propHighlight--;
@@ -699,7 +694,9 @@ void keyPressed() {
         }
         if (instPropRighty == 2) {
           propHighlight--;
-          pan0.hide();
+          if (instruments[propUpward].getLabel() == "S Y N T H" || instruments[propUpward].getLabel() == "K I C K" || instruments[propUpward].getLabel() == "S N A R E"){
+            pan0.hide();
+          }
         }
       }
     }
@@ -1062,13 +1059,13 @@ void keyPressed() {
   }
 }
 
+// Function for assigning musical notes
 void notesCaptionHide0(){
      for(int i = 0; i< 8; i++){
      if(righty == i){
        if(notes0Col == 0){
          if (notes0Row == 0){
            patternsArray[upward][righty].setCaptionLabel("1").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
-           //cp5.get(controlP5.Button.class, "patternsArray" + upward + righty).setColorBackground( color(255, 255, 0) );
          }
          if (notes0Row == 1){
            patternsArray[upward][righty].setCaptionLabel("2").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(255, 255, 0) );
@@ -1099,6 +1096,8 @@ void notesCaptionHide0(){
      }
      }
  }
+
+// Function for Musical notes radiobuttons
 void notes() {
   notes0 = cp5.addRadioButton("notesRadioButton0");
   notes0.setPosition(930, height/2 + 80);
@@ -1150,7 +1149,7 @@ void notes() {
   }
 }
 
-// Playing created patterns 
+// Function for Playing created patterns 
 void playSound(int run){
   for(int i = 0; i < 8; i++){
     if(instruments[i].getLabel() == "S Y N T H" && instList[i][run-1] != 0.0 && patternsArray[i][run-1].getLabel() != ""){
@@ -1225,16 +1224,16 @@ void propFunction0() {
       for (int h = 0; h < 100; h += 50){
         int j = h/50;
         if(instPropUpward == j){
-          fill(color(#C62222));
-            int passedMillis = millis() - time2; // calculates passed milliseconds
-            if(passedMillis >= 315){
-                time2 = millis();
-              fill(#000000);
-              //print("\nhahaha");
-            }
-          rect(498 + (i*130), height/2 + 29 + (j*175), 125, 132);
-          fill(#0B1D28);
-          rect(503 + (i*130), height/2 + 33 + (j*175), 116, 126);
+            fill(color(#C62222));
+              int passedMillis = millis() - time2; // calculates passed milliseconds
+              if(passedMillis >= 315){
+                  time2 = millis();
+                fill(#000000);
+                //print("\nhahaha");
+              }
+            rect(498 + (i*130), height/2 + 29 + (j*175), 125, 132);
+            fill(#0B1D28);
+            rect(503 + (i*130), height/2 + 33 + (j*175), 116, 126);
         }
       }
     }

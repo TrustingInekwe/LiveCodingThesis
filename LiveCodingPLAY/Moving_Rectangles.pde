@@ -63,4 +63,3 @@ void movingRectangles(int k){
       ellipse(540 + 7*80, 470, 15, 15);
     }        
  }
- 

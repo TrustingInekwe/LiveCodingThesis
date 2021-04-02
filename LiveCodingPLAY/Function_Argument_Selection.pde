@@ -100,6 +100,7 @@ void funcPropSelec(){
              }
          
                if(instPropRighty == 1){
+                 if (instruments[propUpward].getLabel() == "S Y N T H"){
                  if(time0Col == 0){
                    if (time0Row == 0){
                      propertiesArray[propUpward][propRighty].setCaptionLabel("Tr0").setColorCaptionLabel(0).setFont(font1);
@@ -143,7 +144,9 @@ void funcPropSelec(){
                    }
                  }
                }
+               }
                if(instPropRighty == 2){
+                 if (instruments[propUpward].getLabel() == "S Y N T H"){
                  if(time0Col == 0){
                    if (time0Row == 0){
                      propertiesArray[propUpward][propRighty].setCaptionLabel("D_off").setColorCaptionLabel(0).setFont(font1);
@@ -164,11 +167,13 @@ void funcPropSelec(){
                      bitRes[propUpward] = 2;
                    }
                  }
+                 }
                }
           }
 
          if(instPropUpward == 1){
            if(instPropRighty == 0){
+             if (instruments[propUpward].getLabel() == "S Y N T H"){
              if(time0Col == 0){
                  propertiesArray[propUpward][propRighty].setCaptionLabel("Sin").setColorCaptionLabel(0).setFont(font1);
                  disWave[propUpward] = Waves.SINE;
@@ -185,7 +190,7 @@ void funcPropSelec(){
                  //panValue = 2;
                  disWave[propUpward] = Waves.SAW;
              }
-                   //propHighlight = 1;
+             }
            }
            if(instPropRighty == 1){
              if(time0Col == 0){
@@ -254,6 +259,7 @@ void funcPropSelec(){
              }
            }
            if(instPropRighty == 2){
+             if (instruments[propUpward].getLabel() == "S Y N T H" || instruments[propUpward].getLabel() != "S N A R E" ||  instruments[propUpward].getLabel() != "K I C K"){
              if(time0Col == 0){
                  propertiesArray[propUpward][propRighty].setCaptionLabel("P0").setColorCaptionLabel(0).setFont(font1);
                  if (instruments[propUpward].getLabel() == "S Y N T H" || instruments[propUpward].getLabel() == "K I C K"){
@@ -262,12 +268,12 @@ void funcPropSelec(){
                  else if (instruments[propUpward].getLabel() == "S N A R E"){
                      snare[propUpward].setPan(0);
                  }
-                 else if (instruments[propUpward].getLabel() == "H A T"){
-                     hat[propUpward].setPan(0);
-                 }
-                 else if (instruments[propUpward].getLabel() == "C L A P"){
-                     clap[propUpward].setPan(0);
-                 }
+                 //else if (instruments[propUpward].getLabel() == "H A T"){
+                 //    hat[propUpward].setPan(0);
+                 //}
+                 //else if (instruments[propUpward].getLabel() == "C L A P"){
+                 //    clap[propUpward].setPan(0);
+                 //}
              }
              if(time0Col == 1){
                  propertiesArray[propUpward][propRighty].setCaptionLabel("P1").setColorCaptionLabel(0).setFont(font1);
@@ -277,13 +283,13 @@ void funcPropSelec(){
                  else if (instruments[propUpward].getLabel() == "S N A R E"){
                      snare[propUpward].setPan(1);
                  }
-                 else if (instruments[propUpward].getLabel() == "H A T"){
-                     hat[propUpward].setPan(1);
-                     print("\n NEW VALUUUUUUUUUUUUUUUU");
-                 }
-                 else if (instruments[propUpward].getLabel() == "C L A P"){
-                     clap[propUpward].setPan(1);
-                 }
+                 //else if (instruments[propUpward].getLabel() == "H A T"){
+                 //    hat[propUpward].setPan(1);
+                 //    print("\n NEW VALUUUUUUUUUUUUUUUU");
+                 //}
+                 //else if (instruments[propUpward].getLabel() == "C L A P"){
+                 //    clap[propUpward].setPan(1);
+                 //}
              }
              if(time0Col == 2){
                  propertiesArray[propUpward][propRighty].setCaptionLabel("P-1").setColorCaptionLabel(0).setFont(font1);
@@ -293,13 +299,15 @@ void funcPropSelec(){
                  else if (instruments[propUpward].getLabel() == "S N A R E"){
                      snare[propUpward].setPan(-1);
                  }
-                 else if (instruments[propUpward].getLabel() == "H A T"){
-                     hat[propUpward].setPan(-1);
-                 }
-                 else if (instruments[propUpward].getLabel() == "C L A P"){
-                     clap[propUpward].setPan(-1);
-                 }
+                 //else if (instruments[propUpward].getLabel() == "H A T"){
+                 //    hat[propUpward].setPan(-1);
+                 //}
+                 //else if (instruments[propUpward].getLabel() == "C L A P"){
+                 //    clap[propUpward].setPan(-1);
+                 //}
              }
+             
+           }
            }
          }
 }
