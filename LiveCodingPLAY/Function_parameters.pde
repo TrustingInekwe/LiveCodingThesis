@@ -98,7 +98,7 @@ void propFuncSel0() {
       transpose0.setItemsPerRow(3);
       transpose0.setSpacingColumn(50);
       transpose0.setSpacingRow(30);
-      transpose0.addItem("Tr0", 1).getItem(0).setFont(font1);
+      transpose0.addItem("Non", 1).getItem(0).setFont(font1);
       transpose0.addItem("Tr+1", 2).getItem(1).setFont(font1);
       transpose0.addItem("Tr+2", 3).getItem(2).setFont(font1);
       transpose0.addItem("Tr+3", 4).getItem(3).setFont(font1);

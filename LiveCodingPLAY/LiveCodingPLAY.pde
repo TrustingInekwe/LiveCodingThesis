@@ -282,7 +282,7 @@ public void setup() {
   //========================================================================================= INSTRUMENT DROPDOWNLIST ====================================================================================================================================
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
-    instruments[y] = cp5.addButton("instruments" + y).setPosition(130, 75 + m).setSize(360, 30).setColorBackground(color(#55A3FF)).setCaptionLabel("");
+    instruments[y] = cp5.addButton("instruments" + y).setPosition(130, 75 + m).setSize(360, 30).setColorBackground(color(#B0D5FF)).setCaptionLabel("");
     //fill(#55A3FF);
     //rect(130, 70 + m, 365, 35, 18, 18, 18, 18);
   }
@@ -394,22 +394,22 @@ public void draw() {
   //fill(#181501);
   //rect(505, height/2 , 370, 25); //Functions List rectangle
   
-  //if(redhighlight == 1 || redhighlight == 4){ 
-  //  if(entVal_instrument == 0){
-  //    fill(#0d98ba);
-  //      int passedMillis = millis() - time; // calculates passed milliseconds
-  //      if(passedMillis >= 315){
-  //          time = millis();
-  //          //float r = random(100, 150);
-  //        fill(#0CC5F2);
-  //      }
-  //    rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
-  //  }
-  //  if(entVal_instrument == 1 || entVal_instrument == 2){
-  //    fill(#0d98ba);
-  //    rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
-  //  }
-  //}
+  if(redhighlight == 1 || redhighlight == 4){ 
+    if(entVal_instrument == 0){
+      fill(#1E64B6);
+        int passedMillis = millis() - time; // calculates passed milliseconds
+        if(passedMillis >= 315){
+            time = millis();
+            //float r = random(100, 150);
+          fill(#B0D5FF);
+        }
+      rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+    }
+    if(entVal_instrument == 1 || entVal_instrument == 2){
+      fill(#1E64B6);
+      rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+    }
+  }
   if(redhighlight == 2){ 
     if(propHighlight == 0){ 
       //movingRectancgleFunctionArray = movingRectancgleFunctionArray + speedOfMovingRectangle + 50;
@@ -1150,41 +1150,41 @@ void notes() {
   }
 }
 
+// Playing created patterns 
 void playSound(int run){
-    for(int i = 0; i < 8; i++){
-      if(instruments[i].getLabel() == "S Y N T H" && instList[i][run-1] != 0.0 && patternsArray[i][run-1].getLabel() != ""){
-        myNote[i][run-1] = new ToneInstrument(instList[i][run-1] , panValue[i], disWave[i], gainValue[i], delayVal[i], bitRes[i]);
-        out.playNote( 0.0, 0.1, myNote[i][run-1] );
+  for(int i = 0; i < 8; i++){
+    if(instruments[i].getLabel() == "S Y N T H" && instList[i][run-1] != 0.0 && patternsArray[i][run-1].getLabel() != ""){
+      myNote[i][run-1] = new ToneInstrument(instList[i][run-1] , panValue[i], disWave[i], gainValue[i], delayVal[i], bitRes[i]);
+      out.playNote( 0.0, 0.1, myNote[i][run-1] );
+    }
+   else if (decision[i][run-1] == 1){
+      if(instruments[i].getLabel() == "K I C K"){
+        instList[i][run-1] = 50.0;
+        myNote[i][run-1] = new ToneInstrument(instList[i][run-1] , panValue[i], disWave[i], gainValue[i], delayVal[i]);
+        out.playNote( 0.0, 0.05, myNote[i][run-1]);
+        //print("kick!!!!!!!!!!!!!");
       }
-     else if (decision[i][run-1] == 1){
-        if(instruments[i].getLabel() == "K I C K"){
-          instList[i][run-1] = 50.0;
-          myNote[i][run-1] = new ToneInstrument(instList[i][run-1] , panValue[i], disWave[i], gainValue[i], delayVal[i]);
-          out.playNote( 0.0, 0.05, myNote[i][run-1]);
-          //print("kick!!!!!!!!!!!!!");
-        }
-        if(instruments[i].getLabel() == "S N A R E"){
-          snare[i].rewind();
-          snare[i].play();
-        }
-        if(instruments[i].getLabel() == "C L A P"){
-          
-          clap[i].setPan(-1);
-          clap[i].rewind();
-          clap[i].play(); 
-        }
-        if(instruments[i].getLabel() == "H A T"){
-          hat[i].setPan(-1);
-          hat[i].rewind();
-          hat[i].play(); 
-        }
+      if(instruments[i].getLabel() == "S N A R E"){
+        snare[i].rewind();
+        snare[i].play();
+      }
+      if(instruments[i].getLabel() == "C L A P"){
+        
+        clap[i].setPan(-1);
+        clap[i].rewind();
+        clap[i].play(); 
+      }
+      if(instruments[i].getLabel() == "H A T"){
+        hat[i].setPan(-1);
+        hat[i].rewind();
+        hat[i].play(); 
       }
     }
+  }
 }
 
 void property0() {
-  
-  // property section
+  // upper property section
   for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -1202,9 +1202,11 @@ void property0() {
     }
   }
 }
+
 // property section after selecting
 void propFunction0() {
-  
+   
+  // upper property section stagnant
    for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -1216,6 +1218,7 @@ void propFunction0() {
       }
     }
   }
+  
   // lower property section
   for(int i = 0; i < 3; i++){
     if (instPropRighty == i){
@@ -1229,8 +1232,9 @@ void propFunction0() {
               fill(#000000);
               //print("\nhahaha");
             }
-            //print("\nhahaha");
-          rect(498 + (i*130), height/2 + 30 + (j*173), 125, 132);
+          rect(498 + (i*130), height/2 + 29 + (j*175), 125, 132);
+          fill(#0B1D28);
+          rect(503 + (i*130), height/2 + 33 + (j*175), 116, 126);
         }
       }
     }
