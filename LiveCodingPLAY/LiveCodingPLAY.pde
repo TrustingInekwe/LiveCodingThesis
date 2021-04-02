@@ -89,6 +89,11 @@ float[] freqBaseVal = new float [7];
 //130.81, fr10 = 146.83, fr20 = 164.81, fr30 = 174.61, fr40 = 196.00, fr50 = 220.00, fr60 = 246.94;
 float[][] frNew = new float [8][7];
 int [] gainValues = new int [8];
+int movingRectancglePattern = b + 30;
+int movingRectancgleInstrument = b + 30;
+int movingRectancgleFunctionArray = 1100;
+int movingRectancgleFunctioList = 505;
+int speedOfMovingRectangle = 1;
 
 
 //======================================================================================initialization ends=========================================================================================================================================
@@ -170,7 +175,7 @@ class ToneInstrument implements Instrument
 public void setup() {
   size(1500, 1000);
   frameRate(4);
-  font1 = createFont("NewPeninimMT-48.vlw", 10);
+  font1 = createFont("NewPeninimMT-48.vlw", 15);
   font2 = createFont("SansSerif-30.vlw", 20);
   font3 = createFont("SansSerif-30.vlw", 13);
   imgKICK = loadImage("KICK.png");
@@ -277,8 +282,9 @@ public void setup() {
   //========================================================================================= INSTRUMENT DROPDOWNLIST ====================================================================================================================================
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
-    instruments[y] = cp5.addButton("instruments" + y).setPosition(130, 75 + m).setSize(360, 30).setColorBackground(color(#FFF7C7)).setCaptionLabel("");
-    //print("\ninstruments" + y);
+    instruments[y] = cp5.addButton("instruments" + y).setPosition(130, 75 + m).setSize(360, 30).setColorBackground(color(#55A3FF)).setCaptionLabel("");
+    //fill(#55A3FF);
+    //rect(130, 70 + m, 365, 35, 18, 18, 18, 18);
   }
 
   //========================================================================================= PROPERTY DROPDOWNLIST ====================================================================================================================================
@@ -318,7 +324,8 @@ public void setup() {
 //========================================================================================== DRAW BEGINS ========================================================================================================
 public void draw() {
   background(#0B1D28);
-
+ 
+  //rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 0.0) {
       frNew[propUpward][i] = freqBaseVal[i];
@@ -376,102 +383,54 @@ public void draw() {
   text("A R R A Y 6:", 30, a + 320);
   text("A R R A Y 7:", 30, a + 370);
   
-  if(redhighlight == 2) {
-    if (propHighlight == 0) {
-      fill(#7EFFFF);
+  fill(#1E64B6);
+  rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+  fill(#3F3600);
+  rect((width/2) + (width/5) + 100, 40, 260, 25); //Functions array rectangle
+  //fill(#084C5C);
+  //rect(b + 30, height/2 , 360, 25); //Instrument type rectangle
+  //fill(#181501);
+  //rect((width/2) + (width/5) + 100, height/2 , 260, 25); //Control rectangle
+  //fill(#181501);
+  //rect(505, height/2 , 370, 25); //Functions List rectangle
+  
+  //if(redhighlight == 1 || redhighlight == 4){ 
+  //  if(entVal_instrument == 0){
+  //    fill(#0d98ba);
+  //      int passedMillis = millis() - time; // calculates passed milliseconds
+  //      if(passedMillis >= 315){
+  //          time = millis();
+  //          //float r = random(100, 150);
+  //        fill(#0CC5F2);
+  //      }
+  //    rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+  //  }
+  //  if(entVal_instrument == 1 || entVal_instrument == 2){
+  //    fill(#0d98ba);
+  //    rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+  //  }
+  //}
+  if(redhighlight == 2){ 
+    if(propHighlight == 0){ 
+      //movingRectancgleFunctionArray = movingRectancgleFunctionArray + speedOfMovingRectangle + 50;
+      //if (movingRectancgleFunctionArray > 1250) {
+      //  movingRectancgleFunctionArray = (width/2) + (width/5) + 100;
+      //}
+      fill(#3F3600);
       int passedMillis = millis() - time; // calculates passed milliseconds
-      if(passedMillis >= 315){
-        //  time = millis();
-        //fill(#000000);
-      }
-      //rect((width/2) + (width/5) + 130, 40, 260, 25);
-      rect((width/2) + (width/5) + 95, 35, 270, 35);
-      noStroke();
+        if(passedMillis >= 315){
+            time = millis();
+            //float r = random(30, 54);
+          //fill(63, r, 0);
+          fill(#87770F);
+        }
+      rect((width/2) + (width/5) + 100, 40, 260, 25);
+      //print("\n distance" + movingRectancgleFunctionArray);
     }
-    
-    //if(propHighlight == 2) {
-    //    stroke(0, 255, 0);
-    //    strokeWeight(8.0);
-    //    strokeCap(ROUND);
-    //  int passedMillis = millis() - time; // calculates passed milliseconds
-    //  if(passedMillis >= 315){
-    //    //float r1 = random(255);
-    //    //float r2 = random(255);
-    //    //float r3 = random(255);
-    //    //  time = millis();
-    //    //  stroke(r1, r2, r3);
-    //    //  strokeWeight(8.0);
-    //    //  strokeCap(ROUND);
-    //  }
-    //    noStroke();
-    //}
-    if(propHighlight == 3) {
-        stroke(0, 255, 0);
-        strokeWeight(8.0);
-        strokeCap(ROUND);
-      int passedMillis = millis() - time; // calculates passed milliseconds
-      if(passedMillis >= 315){
-        float r1 = random(255);
-        float r2 = random(255);
-        float r3 = random(255);
-          time = millis();
-          stroke(r1, r2, r3);
-          strokeWeight(8.0);
-          strokeCap(ROUND);
-      }
-        noStroke();
-    }
-  }
-    
-  if ((redhighlight == 4 || redhighlight == 1) && highlight == 0) {
-    if (leave == 0 ){
-      if (redhighlight == 3) {
-      }
-    
-    //if (righty == -1 || righty == 8){
-      fill(#7EFFFF);
-      int passedMillis = millis() - time; // calculates passed milliseconds
-      if(passedMillis >= 315){
-          //time = millis();
-          //fill(#000000);
-      }
-      rect(b + 25, 35, 1010, 35);
-      noStroke();
   }
   
-    if(leave == 1){
-      stroke(0, 255, 0);
-      strokeWeight(8.0);
-      strokeCap(ROUND);
-      int passedMillis = millis() - time; // calculates passed milliseconds
-      if(passedMillis >= 315){
-        float r1 = random(255);
-        float r2 = random(255);
-        float r3 = random(255);
-        time = millis();
-        stroke(r1, r2, r3);
-        strokeWeight(8.0);
-        strokeCap(ROUND);
-      }
-      noStroke();
-    }
-}
-  //fill(#FFED87);
-  //rect(b + 30, height/2 + 300, 350, 100 );
-  //fill(#1D7ABA);
-  //rect(515, 40, 640, 25);
-  fill(#1E64B6);
-  rect(b + 30, 40, 1000, 25); //Pattern Array rectangle
-  //fill(#0B1D28);
-  //rect(b + 150, 43, 120, 20);
-  fill(#1E64B6);
-  rect(b + 30, height/2 , 360, 25); //Instrument rectangle
-  fill(#665700);
-  rect((width/2) + (width/5) + 100, 40, 260, 25); //Functions array rectangle
-  fill(#665700);
-  rect((width/2) + (width/5) + 100, height/2 , 260, 25); //Control rectangle
-  fill(#665700);
-  rect(505, height/2 , 370, 25); //Functions List rectangle
+  
+  
   //================================================================================LOOPING THE GRIDS================================================================================
   if (playALL == 0) { 
     int k = 0;
@@ -491,19 +450,19 @@ public void draw() {
     for ( int f = 0; f < 8; f++) {
       for (int g = 0; g < 8; g++) {
         if (decision[f][g] == 1 && instruments[f].getLabel() == "K I C K") {
-          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("K").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
+          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("K").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
           //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "S N A R E") {
-          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("S").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
+          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("S").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
           //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "H A T") {
-          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("H").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
+          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("H").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
           //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "C L A P") {
-          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("C").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#eabafe) );
+          cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("C").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
           //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         //if (instList[f][g] == 1 && instruments[f].getLabel() == "S Y N T H") {
@@ -535,6 +494,7 @@ public void draw() {
 
   //fill(255,255,255);
   //rect( (width/2) + (width/5) + 103, height/2 + 30, 250, 100);
+  noStroke();
   stroke(255);
   line( (width/2) + (width/5) + 205, height/2 + 30, (width/2) + (width/5) + 205, height/2 + 100 );
   line( (width/2) + (width/5) + 205, height/2 + 50, (width/2) + (width/5) + 205, height/2 + 50 );
@@ -556,27 +516,27 @@ public void draw() {
 
   if (entCircleL == 1) {
     fill (#1D7ABA);
-    circle(1300, height/2 + 155, 70);
+    circle(1300, height/2 + 210, 70);
   }
   if (entCircleR == 1) {
     fill (#1D7ABA);
-    circle(1380, height/2 + 155, 70);
+    circle(1380, height/2 + 210, 70);
   }
   if (entUp == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 145, height/2 + 105, 20, 40);
+    rect((width/2) + (width/5) + 145, height/2 + 160, 20, 40);
   }
   if (entLeft == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 105, height/2 + 145, 40, 20);
+    rect((width/2) + (width/5) + 105, height/2 + 200, 40, 20);
   }
   if (entRight == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 165, height/2 + 145, 40, 20);
+    rect((width/2) + (width/5) + 165, height/2 + 200, 40, 20);
   }
   if (entDown == 1) {
     fill (#1D7ABA);
-    rect((width/2) + (width/5) + 145, height/2 + 165, 20, 40);
+    rect((width/2) + (width/5) + 145, height/2 + 220, 20, 40);
   }
 
   entCircleL = 0;
@@ -643,12 +603,8 @@ public void draw() {
   textSize(13);
   text("(change sound direction)", 760, height/2 + 375); 
   
-  //fill(255);
-  //rect(150, height/2 + 120, 60, 30);
-  //rect(280, height/2 + 120, 60, 30);
-  //rect(410, height/2 + 120, 60, 30);
-  //rect(155, height/2 + 255, 60, 30);
-  //rect(280, height/2 + 255, 60, 30);
+  
+  
   fill(255);
   textSize(15);
   text("KICK", 160, height/2 + 140);
@@ -674,6 +630,8 @@ public void draw() {
 void keyPressed() {
   if (keyCode == TAB) {
     entCircleR = 1;
+    
+    //
     if (synthSel == 0 && (highlight == 1) && (redhighlight == 1 || redhighlight == 4)) {
       patList1 = 1;
       //instSelect[0] = 0;
@@ -695,8 +653,7 @@ void keyPressed() {
     }
 
     if ((highlight == 2) && (redhighlight == 1 || redhighlight == 4)) {
-
-      instruments[upward].setCaptionLabel("");
+      //instruments[upward].setCaptionLabel("");
       entVal_instrument = 1;
       highlight--;
       instSelect[upward] = 0;
@@ -749,7 +706,6 @@ void keyPressed() {
   }
 
   if (keyCode == ENTER) {
-    //print("propHighlight =\n" + propHighlight);
     if ( entVal_instrument == 2 && (redhighlight == 1 || redhighlight == 4) ) {
       entVal_instrument = 3;
       
@@ -989,7 +945,6 @@ void keyPressed() {
           }
           intRighty = constrain (intRighty, 0, 1);
         }
-        print("\n\t\t\t\tinstrumentright =" + intRighty);
         //if(instUpward == 0){
         //  
         //  
@@ -1206,7 +1161,7 @@ void playSound(int run){
           instList[i][run-1] = 50.0;
           myNote[i][run-1] = new ToneInstrument(instList[i][run-1] , panValue[i], disWave[i], gainValue[i], delayVal[i]);
           out.playNote( 0.0, 0.05, myNote[i][run-1]);
-          print("kick!!!!!!!!!!!!!");
+          //print("kick!!!!!!!!!!!!!");
         }
         if(instruments[i].getLabel() == "S N A R E"){
           snare[i].rewind();
@@ -1272,7 +1227,7 @@ void propFunction0() {
             if(passedMillis >= 315){
                 time2 = millis();
               fill(#000000);
-              print("\nhahaha");
+              //print("\nhahaha");
             }
             //print("\nhahaha");
           rect(498 + (i*130), height/2 + 30 + (j*173), 125, 132);

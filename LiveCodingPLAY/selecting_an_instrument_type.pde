@@ -16,6 +16,11 @@ void selectInstrument(){
           if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 0){
           }
             if(entVal_instrument == 3){
+              for(int i = 0; i < 8; i++){
+                   //patternsArray[propUpward][i].setCaptionLabel("");
+                   decision[upward][i] = 0;
+                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
+                 }
             cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("K I C K").setColorCaptionLabel(255).setFont(font2).setColorBackground( color(#eabafe) );
                 highlight = 1;
                 instSelect[upward] = 0;
@@ -37,6 +42,11 @@ void selectInstrument(){
             //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S N A R E").setColorCaptionLabel(255).setFont(font2);
           }
           if(entVal_instrument == 3){
+              for(int i = 0; i < 8; i++){
+                   //patternsArray[propUpward][i].setCaptionLabel("");
+                   decision[upward][i] = 0;
+                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
+                 }
             cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S N A R E").setColorCaptionLabel(255).setFont(font2);
             highlight = 1;
             instSelect[upward] = 0;
@@ -57,6 +67,11 @@ void selectInstrument(){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("H A T").setColorCaptionLabel(255).setFont(font2);
             }
             if(entVal_instrument == 3){
+              for(int i = 0; i < 8; i++){
+                   //patternsArray[propUpward][i].setCaptionLabel("");
+                   decision[upward][i] = 0;
+                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
+                 }
               cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("H A T").setColorCaptionLabel(255).setFont(font2);
               highlight = 1;
               instSelect[upward] = 0;
@@ -80,7 +95,13 @@ void selectInstrument(){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S Y N T H").setColorCaptionLabel(255).setFont(font2);
             }
             if(entVal_instrument == 3){
+              for(int i = 0; i < 8; i++){
+                   //patternsArray[propUpward][i].setCaptionLabel("");
+                   decision[upward][i] = 0;
+                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
+                 }
               cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S Y N T H").setColorCaptionLabel(255).setFont(font2);
+              
                 highlight = 1;
                 instSelect[upward] = 0;
                 cp5.get(controlP5.Button.class, "SYNTH" + 0).setColorBackground( color( #0B1D28) );
@@ -100,6 +121,11 @@ void selectInstrument(){
               //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("C L A P").setColorCaptionLabel(255).setFont(font2);
             }
             if(entVal_instrument == 3){
+              for(int i = 0; i < 8; i++){
+                   //patternsArray[propUpward][i].setCaptionLabel("");
+                   decision[upward][i] = 0;
+                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
+                 }
               cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("C L A P").setColorCaptionLabel(255).setFont(font2);
                 highlight = 1;
                 instSelect[upward] = 0;

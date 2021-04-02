@@ -24,12 +24,11 @@ void propFuncSel0() {
   
   if (instPropUpward == 0) {
     if (instPropRighty == 0) {
-      //notes0Row = 0, notes0Col = 0, time0Row = 0, time0Col = 0
-      //fill(#AF69EF);
-    //  fill(#1E64B6);
-    //rect(910, height/2 , 220, 25);
+       
+      fill(#7EFFFF);
+      rect(885, height/2 - 5, 250, 35);
       fill(#645605);
-      rect(890, height/2 , 240, 25);
+      rect(890, height/2 , 240, 25); //funtion parameter rectangle
       fill(250);
       textSize(15);
       text("FUNCTION PARAMETERS", 910, height/2 + 20);
@@ -51,7 +50,7 @@ void propFuncSel0() {
       //time0.setItemsPerRow(3);
       //time0.setSpacingColumn(50);
       time0.setSpacingRow(15);
-      time0.addItem("Normal(0.5)", 1).getItem(0).setFont(font1);
+      time0.addItem("Default(0.5)", 1).getItem(0).setFont(font1);
       time0.addItem("Medium(1.0)", 2).getItem(1).setFont(font1);
       time0.addItem("Medium(1.5)", 3).getItem(2).setFont(font1);
       time0.addItem("High(2.0)", 4).getItem(3).setFont(font1);
@@ -91,15 +90,14 @@ void propFuncSel0() {
       rect(890, height/2 + 35, 240, 295 );
       //notes0Row = 0, notes0Col = 0, time0Row = 0, time0Col = 0
       transpose0 = cp5.addRadioButton("transposeRadioButton2");
-      transpose0.setPosition(930, height/2 + 80);
+      transpose0.setPosition(900, height/2 + 80);
       transpose0.setSize(20, 20);
       transpose0.setColorForeground(color(120));
       transpose0.setColorActive(color(#C62222));
       transpose0.setColorLabel(color(0));
       transpose0.setItemsPerRow(3);
       transpose0.setSpacingColumn(50);
-      //transpose0.setSpacingRow(50);
-      transpose0.setSpacingRow(15);
+      transpose0.setSpacingRow(30);
       transpose0.addItem("Tr0", 1).getItem(0).setFont(font1);
       transpose0.addItem("Tr+1", 2).getItem(1).setFont(font1);
       transpose0.addItem("Tr+2", 3).getItem(2).setFont(font1);
@@ -207,7 +205,7 @@ void propFuncSel0() {
       wave0.setItemsPerRow(1);
       //wave0.setSpacingColumn(50);
       wave0.setSpacingRow(50);
-      wave0.addItem("Sine", 1).getItem(0).setFont(font1);
+      wave0.addItem("Default(Sine)", 1).getItem(0).setFont(font1);
       wave0.addItem("Square", 2).getItem(1).setFont(font1);
       wave0.addItem("Saw", 3).getItem(2).setFont(font1);
       ;
@@ -272,7 +270,7 @@ void propFuncSel0() {
       pan0.setItemsPerRow(1);
       //pan0.setSpacingColumn(50);
       pan0.setSpacingRow(50);
-      pan0.addItem("Normal(0)", 1).getItem(0).setFont(font1);
+      pan0.addItem("Default(0)", 1).getItem(0).setFont(font1);
       pan0.addItem("Right(1)", 2).getItem(1).setFont(font1);
       pan0.addItem("Left(-1)", 3).getItem(2).setFont(font1);
       ;

@@ -1,7 +1,7 @@
 void movingAround() {
   if (patList1 == 0) {
     for (int y = 0; y < 8; y++) {
-      cp5.get(controlP5.Button.class, "instruments" + y).setColorBackground(color(#a6cee3));
+      cp5.get(controlP5.Button.class, "instruments" + y).setColorBackground(color(#B0D5FF));
     }
     for (int l = 0; l < 8; l++) {
       if ((upward == 0) && (righty > 0 && righty < 7)) {

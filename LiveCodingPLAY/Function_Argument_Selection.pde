@@ -247,6 +247,7 @@ void funcPropSelec(){
                else{
                  for(int h = 0; h < 8; h++){
                    decision[propUpward][h] = 0;
+                   patternsArray[propUpward][h].setCaptionLabel("");
                    cp5.get(controlP5.Button.class, "patternsArray" + propUpward + h).setColorBackground( color(#ffffff) );
                  }
                }
