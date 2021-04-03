@@ -230,7 +230,8 @@ void propFuncSel0() {
     }
   }
   if (instPropUpward == 1) {
-    if (instPropRighty == 0) {if (instruments[propUpward].getLabel() == "S N A R E" || instruments[propUpward].getLabel() == "C L A P" 
+    if (instPropRighty == 0) {
+      if (instruments[propUpward].getLabel() == "S N A R E" || instruments[propUpward].getLabel() == "C L A P" 
           || instruments[propUpward].getLabel() == "H A T" || instruments[propUpward].getLabel() == "K I C K"){
         
             int passedMillis = millis() - time; // calculates passed milliseconds
