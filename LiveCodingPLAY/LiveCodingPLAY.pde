@@ -1,8 +1,7 @@
 /**
- * Implementation-free perspective to be read by developers 
- * who might not necessarily have the source code at hand
+ *
  * 
- * Name: Trusting 
+ * Name: TRUSTING O. INEKWE 
  * Date: 2020/2021 
  * @version 
  * @copyright
@@ -17,129 +16,115 @@ import ddf.minim.ugens.*;
 Minim minim;
 AudioOutput out;
 AudioPlayer  kick1, snare1, clap1, hat1, tom1;
-//AudioPlayer clap1;
-AudioPlayer [] snare = new AudioPlayer [8];
+
+// CREATING IMAGE OBJECTS FOR INSTRUMENTS AND THE BLOCK PROPERTY
+PImage imgKICK, imgSNARE, imgHAT, imgCLAP, imgSYNTH, imgEnvelope, imgDanger;
+
+// CREATING AUDIOPLAYER OBJECTS FOR INSTRUMENTS
+AudioPlayer [] snare = new AudioPlayer [8]; 
 AudioPlayer [] clap = new AudioPlayer [8];
 AudioPlayer [] hat = new AudioPlayer [8];
 AudioPlayer [] tom = new AudioPlayer [8];
 
-Gain gainAudio;
-Pan panAudio;
-float panhat = 1.0;
 
 //=================================================================================initialization begins=========================================================================================================================================
 
-ControlP5 cp5;
+ControlP5 cp5; // creating an instance of controlP5 object
 
-PFont font1, font2, font3;
+PFont font1, font2, font3; // creating font variables
 
-RadioButton r1, r2, r3, w;
-RadioButton time0, transpose0, notes0, pan0, effect0, wave0, delete0;
-int val = 0, octave = 1, func = 0;
-Button i0, k0, sn0, h0, c0, sy0, e0, f0, play, pause;
+RadioButton time0, transpose0, notes0, pan0, effect0, wave0, delete0; //radiobuttons for sythn and function list
+Button i0, k0, sn0, h0, c0, sy0, e0, f0, play, pause; 
 Button t0, tr0, r0, a0, de0, p0;
-Button [][] patternsArray = new Button[8][8];
-Button [][] propertiesArray = new Button[8][8];
-Waveform [] disWave = new Waveform[8];
+Button [][] patternsArray = new Button[8][8]; // Creating 16block array for the PATTERNS ARRAY
+Button [][] propertiesArray = new Button[8][8]; // Creating an array of 16 blocks for the PROPERTIES ARRAY
 
-float [] gainValue = new float[8];
-int [] bitRes = new int[8];
-float [] delayVal = new float[8];
-int [] panValue = new int[8];
-int [][] decision = new int[8][8];
-Button [] instruments = new Button[8];
-float[][] instList = new float[8][8];
-float[] transVal = new float[8];
+Waveform [] disWave = new Waveform[8]; // Creating an array of waveforms for synth and kick
+float [] gainValue = new float[8]; // Creating an array of GAINVALUES FOR INSTRUMENTS
+int [] bitRes = new int[8]; // Creating an array of BITCRUSH OBJECTS
+float [] delayVal = new float[8]; // Creating an array of DELAY VALUES
+int [] panValue = new int[8]; // Creating an array of PAN VALUES
+int [][] decision = new int[8][8]; // Creating an array for PATTERN ARRAY SELECTION DECISIONS
+Button [] instruments = new Button[8]; // Creating an array of INSTRUMENT BUTTONS(BOXES)
+float[][] instList = new float[8][8]; // Creating an array of FREQUENCEY VALUES for each ROW that has a SYNTH or KICK
+float[] transVal = new float[8]; // Creating an array of TRANSPOSE VALUES FOR EACH ROW
 
-ScrollableList lastP;
-
-float attackTimePiano = 0.003;
-float sustainTimePiano = 0.004;
-float sustainLevelPiano = 0.3;
-float releaseTimePiano = 0.4;
-PImage imgKICK, imgSNARE, imgHAT, imgCLAP, imgSYNTH, imgEnvelope;
-
-float attackTimeBass = 0.001;
-float sustainTimeBass = 0.004;
-float sustainLevelBass = 0.3;
-float releaseTimeBass = 0.4;
-
-float attackTimeDrum = 0.005;
-float sustainTimeDrum = 0.01;
-float sustainLevelDrum = 0.01;
-float releaseTimeDrum = 0.4;
-int a = 75, b = 100, c = b + 100;
-int entCircleL = 0, entCircleR = 0, entLeft = 0, entRight = 0, entUp = 0, entDown = 0;
+int a = 75, b = 100, c = b + 100; // Some values used for button layout
+int entCircleL = 0, entCircleR = 0, entLeft = 0, entRight = 0, entUp = 0, entDown = 0; // values for XBOX-like buttons
 int[] property0 = new int[8];
-int[] instSelect = new int[8];
+int[] instSelect = new int[8]; // creating an array of instruments for EACH ROW
 
-int highlight = 0, righty = 8, currentPositionY = 0, currentPositionX = -1;
-int upward = 0, redhighlight = 4, leave = 0, close = 0, run = 0, playALL = 0;
-int firstVal = 0, intRighty = 3, instUpward = 0, checker = 0, entVal_instrument = 0, entVal_pattern = 0;
-int synthSel = 0, notes0Row = 0, notes0Col = 0, time0Row = 0, time0Col = 0;
-int currentNotePosition, propLeave = 0, propRighty = 0, propUpward = 0; 
-int propHighlight = 0, instPropRighty = 0, instPropUpward = 0, propcurrentPositionX = 0, propcurrentPositionY = 0;
-int patList1 = 0, patList2 = 0, decide = 0;
-int time = millis();
+int highlight = 0; // highlight for selecting PATTERN ARRAY AREA
+int righty = 8, currentPositionY = 0, currentPositionX = -1; // "righty" for moving RIGHT AND LEFT in the PATTERN AREA, "currentPositionY/X" for last position in the PATTERN ARRAY
+int upward = 0; // "upward" for MOVING UP and DOWN in the PATTERN AREA
+int redhighlight = 4, leave = 0, close = 0, run = 0, playALL = 0; // "redhighlight" for selecting the INSTRUMENT and PATTERN ARRAY area
+int intRighty = 3, instUpward = 0;  // "intRighty" for moving R/L the FUNCTION LIST and "instUpward" for moving U/D the FUNCTION LIST
+int entVal_instrument = 0; // used for selectin the instrument section of the INSTRUMENT and PATTERN ARRAY area
+int entVal_pattern = 0; // used for selectin the pattern array section of the INSTRUMENT and PATTERN ARRAY area
+int synthSel = 0; // determines if a synth pattern can be created
+int notes0Row = 0, notes0Col = 0; // used for moving around the synth radio buttons "notes0Row" for moving L/R a row, "notes0Col" for moving UP/DOWN a column
+int time0Row = 0, time0Col = 0; // used for moving around the property arguments "time0Row" for moving around a row, "time0Col" for moving around a column
+int propLeave = 0; // used when exiting the property section (0 = exit, 1 = enter)
+int propRighty = 0, propUpward = 0; // "propRighty" for moving RIGHT AND LEFT in the PROPERTY AREA, "propUpward" for moving UP and DOWN in the PROPERTY AREA
+int propHighlight = 0; // for selcting the function property section
+int instPropRighty = 0, instPropUpward = 0; // "instPropRighty" for moving RIGHT AND LEFT in the FUNCTION LIST AREA, "instPropUpward" for moving UP and DOWN in the FUNCTION LIST AREA
+int propcurrentPositionX = 0, propcurrentPositionY = 0; // for saving the current version of the property area.
+int patList1 = 0; // used for moving around the pattern array (0 = you can move around the instrument and pattern array, 1 = you can't!)
+int patList2 = 0; // used for moving around the instrument type section after moving around the pattern array
+int decide = 0; // SELECTING CHOICES IN THE PATTERN ARRAY
+
+//Returns the number of milliseconds (thousandths of a second) since starting the program
+int time = millis(); 
 int time2 = millis();
 int time3 = millis();
-int FunctionBlinker = 0;
 
-float[] freqBaseVal = new float [7];
-float[][] frNew = new float [8][7];
-int [] gainValues = new int [8];
-int movingRectancglePattern = b + 30;
-int movingRectancgleInstrument = b + 30;
-int movingRectancgleFunctionArray = 1100;
-int movingRectancgleFunctioList = 505;
-int speedOfMovingRectangle = 1;
+float[] freqBaseVal = new float [7]; // creating an array for base frequency values for the synth and kcik
+float[][] frNew = new float [8][7]; // creating an array for new frequency values for the synth and kick
+int [] gainValues = new int [8]; // creating an array for gainValues for the synth
 //======================================================================================initialization ends=========================================================================================================================================
+ToneInstrument[][] myNote; // creating an array of ToneInstrument Class
 
-ToneInstrument[][] myNote;
 class ToneInstrument implements Instrument
 {
-  Oscil sineOsc, sineOsc1, LFO;
-  Pan pan, pan1;
-  ADSR adsr;
-  Delay myDelay, myDelay1;
-  BitCrush bitCrush;
-  //Gain gain;
-  ToneInstrument( float oscFrequency, int panValue, Waveform wave, float gainValue, float delayVal, int bitRes) //for synth
+  Oscil sineOsc, sineOsc1, LFO; // creating Oscillator variables
+  Pan pan, pan1; // creating Pan variables
+  ADSR adsr; // creating ADSR variables
+  Delay myDelay, myDelay1; // creating Delay variables
+  BitCrush bitCrush; // creating BitCrush variables
+  
+  // CONSTRUCTOR FOR SYNTH
+  ToneInstrument( float oscFrequency, int panValue, Waveform wave, float gainValue, float delayVal, int bitRes) 
   {
-    sineOsc = new Oscil( oscFrequency, gainValue, wave );
-    //ADSR(float maxAmp, float attTime, float decTime, float susLvl, float relTime)
-    adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 );
-    bitCrush = new BitCrush(bitRes, out.sampleRate());
-    myDelay = new Delay( delayVal, 0.5, true, true );
-    pan = new Pan(panValue);
-    sineOsc.patch(adsr);
-    if (bitRes == 0 && delayVal == 0.0) {
+    sineOsc = new Oscil( oscFrequency, gainValue, wave ); //Initializing Oscillator variable
+    adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 ); //Initializing ADSR variable
+    bitCrush = new BitCrush(bitRes, out.sampleRate()); //Initializing BitCrush variable
+    myDelay = new Delay( delayVal, 0.5, true, true ); //Initializing Delay variable
+    pan = new Pan(panValue); //Initializing Pan variable
+    sineOsc.patch(adsr); // Patching
+    if (bitRes == 0 && delayVal == 0.0) {  //if there is no delay AND no bitcrush value entered for the syth
       adsr.patch(pan);
-    } else if (bitRes != 0 && delayVal == 0.0) {
+    } else if (bitRes != 0 && delayVal == 0.0) {  //if there is no delay BUT bitcrush value entered for the syth
       adsr.patch(bitCrush); 
       bitCrush.patch(pan);
-    } else if (bitRes == 0 && delayVal != 0.0) {
+    } else if (bitRes == 0 && delayVal != 0.0) {   //if there is a delay BUT NO bitcrush value entered for the kick
       adsr.patch(pan); 
       pan.patch(myDelay);
-    } else if (bitRes != 0 && delayVal != 0.0) {
+    } else if (bitRes != 0 && delayVal != 0.0) {   //if BOTH delay and bitcrush value entered for the kick
       adsr.patch(bitCrush); 
       bitCrush.patch(pan); 
       myDelay.patch(pan);
     }
-    //pan.patch( out );
-    //LFO = new Oscil( 0.5, 1.0, wave );
-    //adsr.patch( pan );
-    //LFO.patch( pan.pan );
   }
-  ToneInstrument( float oscFrequency, int panValue, Waveform wave, float gainValue, float delayVal)  //for kick
+  
+  // CONSTRUCTOR FOR KICK
+  ToneInstrument( float oscFrequency, int panValue, Waveform wave, float gainValue, float delayVal)
   {
-    sineOsc1 = new Oscil( oscFrequency, gainValue, wave );
-    adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 );
-    //adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 );
-    pan = new Pan(panValue);
-    myDelay1 = new Delay( delayVal, 0.1, true, true );
-    sineOsc1.patch(adsr);
-    if (delayVal == 0.0) {
+    sineOsc1 = new Oscil( oscFrequency, gainValue, wave ); //Initializing Oscillator variable
+    adsr = new ADSR( 0.5, 0.00001, 0.05, 0.5, 0.1 ); //Initializing ADSR variable
+    pan = new Pan(panValue); //Initializing Pan variable
+    myDelay1 = new Delay( delayVal, 0.1, true, true ); //Initializing Delay variable
+    sineOsc1.patch(adsr); //Patching
+    if (delayVal == 0.0) { //if there is no delay entered for the kick
       adsr.patch(pan);
     } else {
       adsr.patch(myDelay1); 
@@ -149,38 +134,48 @@ class ToneInstrument implements Instrument
 
   void noteOn( float dur )
   {
-    pan.patch( out );
-    adsr.noteOn();
+    pan.patch( out ); //PANNING THE SOUND 
+    adsr.noteOn(); //SWITCHING ON ADSR FOR THE SOUND 
   }
   void noteOff()
   {
-    pan.unpatch( out );
+    pan.unpatch( out ); // UNPANNING THE SOUND
     //adsr.unpatchAfterRelease( out );
-    adsr.noteOff();
+    adsr.noteOff(); //SWITCHING OFF ADSR FOR THE SOUND 
   }
 }
 
-//=========================================================================================setup starts=========================================================================================================================================
+//========================================================================================= SETUP STARTS =========================================================================================================================================
 public void setup() {
-  size(1500, 1000);
-  frameRate(4);
+  size(1500, 1000); // SETTING THE SIZE OF THE WINDOW
+  
+  frameRate(4); //SETTING THE FRAME RATE FOR THE DRAW FUNCTION
+  
+  // SETTING THE FONTS IN THE SYSTEM
   font1 = createFont("NewPeninimMT-48.vlw", 15);
   font2 = createFont("SansSerif-30.vlw", 20);
   font3 = createFont("SansSerif-30.vlw", 13);
+  // SETTING THE IMAGES IN THE SYSTEM
   imgKICK = loadImage("KICK.png");
   imgSNARE = loadImage("SNARE.jpg");
   imgHAT = loadImage("HAT.jpg");
   imgCLAP = loadImage("CLAP.png");
   imgSYNTH = loadImage("SYNTH.jpg");
+  imgDanger = loadImage("danger.png");
   //imgEnvelope = loadImage("ASDR.png");
   minim = new Minim( this );
   out = minim.getLineOut( Minim.STEREO, 2048 );
 
+  // CREATING AN INSTANCE OF CONTROLP5 LIBRARY
   cp5 = new ControlP5(this);
+  
+  // CREATING AN ARRAY OF TONEINSTRUMENT OF A MUSICAL NOTE
   myNote = new ToneInstrument[8][8]; 
 
-  gainAudio = new Gain(-5.f);
-    
+  // CREATING AN INSTANCE OF MINIM LIBRARY GAIN OBJECT AND INITIALIZING THE VALUE TO -5.0
+  //gainAudio = new Gain(-5.f);
+  
+  // INITIALIZING THE INSTRUMENTS ARRAYS
   for(int i = 0; i < 8; i++){
     snare[i] = minim.loadFile("snare.wav");
   }   
@@ -191,17 +186,19 @@ public void setup() {
     hat[i] = minim.loadFile("massive-hi-hat-8.wav");
   }  
   
+  // INITIALIZING THE INSTRUMENTS THAT SOUND WHEN YOU MOVE AROUND THE INSTRUMENT TYPE
   kick1 = minim.loadFile("kiiiik.wav");
   clap1 = minim.loadFile("707-clap.wav");
   hat1 = minim.loadFile("massive-hi-hat-8.wav");
   tom1 = minim.loadFile("808-tom.wav");
   snare1 = minim.loadFile("snare.wav");
   
+  // INITIALIZING THE INSTRUMENTS GAIN VALUE TO -20
   kick1.setGain(-20);
   clap1.setGain(-20);
   hat1.setGain(-20);
   snare1.setGain(-20);
-  //========================================================================================= Synth Values INITIALIZATION =========================================================================================================================================  
+  // Synth Values INITIALIZATION 
   freqBaseVal[0] = 130.81;
   freqBaseVal[1] = 146.83;
   freqBaseVal[2] = 164.81;
@@ -214,7 +211,8 @@ public void setup() {
       frNew[i][j] = freqBaseVal[j];
     }
   }
-  //========================================================================================= Function List INITIALIZATION =========================================================================================================================================  
+  
+  //  Function List INITIALIZATION  
   for (int i = 0; i < 8; i++) {
     transVal[i] = 0.0;
   }
@@ -241,7 +239,8 @@ public void setup() {
     snare[i].setGain(-20);
     hat[i].setGain(-20);
   }
-  //========================================================================================= DECISION INITIALIZATION =========================================================================================================================================  
+  
+  //  PATTERN ARRAY CHOSEN CHOICES (DECISION) ARRAY INITIALIZATION   
   for (int i = 0; i<8; i++) {
     for (int j = 0; j<8; j++) {
       decision[i][j] = 8;
@@ -258,15 +257,14 @@ public void setup() {
       myNote[i][j] = new ToneInstrument(instList[i][j], panValue[i], disWave[i], gainValue[i], delayVal[i], bitRes[i]);
     }
   }
-  //========================================================================================= INSTRUMENT DROPDOWNLIST ====================================================================================================================================
+  
+  // INSTRUMENT BOXES(BUTTONS) CREATION FOR SELECTED INSTRUMENT
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
     instruments[y] = cp5.addButton("instruments" + y).setPosition(130, 75 + m).setSize(360, 30).setColorBackground(color(#B0D5FF)).setCaptionLabel("");
-    //fill(#55A3FF);
-    //rect(130, 70 + m, 365, 35, 18, 18, 18, 18);
   }
 
-  //========================================================================================= PROPERTY DROPDOWNLIST ====================================================================================================================================
+  // PATTERN BOXES(BUTTONS) CREATION 
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
     for (int j = 0; j < 8; j++) {
@@ -274,7 +272,8 @@ public void setup() {
       //print("\npatternsArray" + y + j);
     }
   }
-
+  
+  //PROPERTY BOXES(BUTTONS) CREATION
   for (int m = 0; m < 400; m+=50) {
     int y = m/50;
     for (int j = 0; j < 4; j++) { 
@@ -284,7 +283,7 @@ public void setup() {
   }
 
 
-  //=========================================================================================INSTRUMENT SECTION=========================================================================================================================================
+  // INSTRUMENT BOXES(BUTTONS) CREATION FOR INSTRUMENT TYPE
   k0 = cp5.addButton("KICK" +0).setPosition(125, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   sn0 = cp5.addButton("SNARE" +0).setPosition(253, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   h0 = cp5.addButton("HAT"+0).setPosition(380, height/2 + 35).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
@@ -292,6 +291,7 @@ public void setup() {
   c0 = cp5.addButton("CLAP" +0).setPosition(253, height/2 + 170).setSize(115, 85).setColorBackground(#0B1D28).setCaptionLabel("");
   //e0 = cp5.addButton("ENVELOPES" +0).setPosition(243, height/2 + 230).setSize(95, 80).setColorBackground(#0B1D28).setCaptionLabel("");
   
+  // FUNCTIONS BOXES(BUTTONS) CREATION FOR PROPERTY SECTION
   t0 = cp5.addButton("GAIN" +0).setPosition(505, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
   tr0 = cp5.addButton("TRANSPOSE" +0).setPosition(635, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
   r0 = cp5.addButton("EFFECTS"+0).setPosition(765, height/2 + 35).setSize(110, 120).setColorBackground(color(#FFED87)).setFont(font1).setCaptionLabel("").setColorCaptionLabel(0);
@@ -304,19 +304,19 @@ public void setup() {
 public void draw() {
   background(#0B1D28);
  
-  //rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
+  // USING THE BASE FREQUENCY FOR SYNTH INSTRUMENTS
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 0.0) {
       frNew[propUpward][i] = freqBaseVal[i];
     }
   }
-
+  
+  // TRANSPOSING THE FREQUENCY FOR SYNTH INSTRUMENTS
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 2.0) {
-      frNew[propUpward][i] = freqBaseVal[i] * 2;
+      frNew[propUpward][i] = freqBaseVal[i] * 2; // TRANSPOSING AN OCTAVE UP
     }
   }
-
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 3.0) {
       frNew[propUpward][i] = freqBaseVal[i] * 4;
@@ -348,9 +348,10 @@ public void draw() {
     }
   }
 
-  //================================================================================NAVIGATING THE PATTERN GRIDS=========================================================================================================================== 
+  // NAVIGATING AROUND THE PATTERN BOXES(GRIDS)
   movingAround();
   
+  // TEXT FOR PATTERN ROWS
   fill(250);
   textSize(15);
   text("A R R A Y 0:", 30, a + 20);
@@ -363,6 +364,7 @@ public void draw() {
   text("A R R A Y 7:", 30, a + 370);
   
   
+  // RECTANGLE FOR SECTION HEADERS
   fill(#1E64B6);
   rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
   fill(#9D6000);
@@ -375,12 +377,7 @@ public void draw() {
   //rect(505, height/2 , 370, 25); //Functions List rectangle
   
   
-  //stroke(255);
-  ////line( (width/2) + (width/5) + 205, height/2 + 30, (width/2) + (width/5) + 205, height/2 + 100 );
-  //line( (width/2) + (width/5) + 90, 70, (width/2) + (width/5) + 90, height/2 + 50 );
-  //noStroke();
-  
-  
+  //HIGHLIGHTING THE INSTRUMENT AND PATTERN SECTION
   if(redhighlight == 1 || redhighlight == 4){ 
     if(entVal_instrument == 0){
       fill(#1E64B6);
@@ -388,7 +385,7 @@ public void draw() {
         if(passedMillis >= 315){
             time = millis();
             //float r = random(100, 150);
-          fill(#B0D5FF);
+          fill(#B0D5FF); // TEXT FOR PATTERN BOXES
         }
       rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
     }
@@ -397,12 +394,9 @@ public void draw() {
       rect(b + 30, 40, 1005, 25); //Pattern Array rectangle
     }
   }
+  
   if(redhighlight == 2){ 
-    if(propHighlight == 0){ 
-      //movingRectancgleFunctionArray = movingRectancgleFunctionArray + speedOfMovingRectangle + 50;
-      //if (movingRectancgleFunctionArray > 1250) {
-      //  movingRectancgleFunctionArray = (width/2) + (width/5) + 100;
-      //}
+    if(propHighlight == 0){
       fill(#3F3600);
       int passedMillis = millis() - time; // calculates passed milliseconds
         if(passedMillis >= 315){
@@ -412,63 +406,59 @@ public void draw() {
           fill(#E7AD54);
         }
       rect((width/2) + (width/5) + 100, 40, 260, 25);
-      //print("\n distance" + movingRectancgleFunctionArray);
     }
   }
   
   
   
-  //================================================================================LOOPING THE GRIDS================================================================================
+  // MOVING DOTS THE GRIDS
   if (playALL == 0) { 
     int k = 0;
     while (k < run && k < 8) {
-      movingRectangles(k);
+      movingRectangles(k); // TEXT FOR PATTERN BOXES
       k = k + 1;
     }
     gettingInstrumentValues();
     run = (run % 8) + 1;
-    playSound(run);
+    playSound(run); // PLAYING A SELECTED PATTERN
   }
   
+  // SELECTING AN INSTRUMENT
+  selectInstrument(); 
   
- 
-  selectInstrument(); //selecting an Instrument
+  // SELECTING CHOICES IN THE PATTERN ARRAY
   if (decide == 1) {
     for ( int f = 0; f < 8; f++) {
       for (int g = 0; g < 8; g++) {
         if (decision[f][g] == 1 && instruments[f].getLabel() == "K I C K") {
           cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("K").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
-          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "S N A R E") {
           cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("S").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
-          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "H A T") {
           cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("H").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
-          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
         if (decision[f][g] == 1 && instruments[f].getLabel() == "C L A P") {
           cp5.get(controlP5.Button.class, "patternsArray" + f + g).setCaptionLabel("C").setFont(font2).setColorCaptionLabel(0).setColorBackground( color(#B0D5FF) );
-          //print("\ndecision[upward][righty]==" + decision[upward][righty]);
         }
-        //if (instList[f][g] == 1 && instruments[f].getLabel() == "S Y N T H") {
-        //  cp5.get(controlP5.Button.class, "patternsArray" + f + g).setColorBackground( color(255, 255, 0) );
-        //  print("it has been set");
-        //}
       }
     }
   }
+  
+  // SELECTING THE FUNCTION ARRAY
   if (propHighlight == 1) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
       property0();
     }
   }
+  // SELECTING THE FUNCTION LIST
   if (propHighlight == 2) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7  ) {
       propFunction0();
     }
   }
+  // SELECTING THE FUNCTION PARAMETER SECTION
   if (propHighlight == 3) {
     if (propUpward == 0 || propUpward == 1 || propUpward == 2 || propUpward == 3 || propUpward == 4 || propUpward == 5 || propUpward == 6 || propUpward == 7) {
       propFuncSel0();
@@ -478,22 +468,20 @@ public void draw() {
   if (propHighlight == 4) {
   }
   
-
-  //fill(255,255,255);
-  //rect( (width/2) + (width/5) + 103, height/2 + 30, 250, 100);
+  
+  // TEXT FOR THE CONTROLS SECTION
   noStroke();
   stroke(255);
   line( (width/2) + (width/5) + 205, height/2 + 30, (width/2) + (width/5) + 205, height/2 + 100 );
   line( (width/2) + (width/5) + 205, height/2 + 50, (width/2) + (width/5) + 205, height/2 + 50 );
   noStroke();
   fill(255);
-  //textSize(20);
-  ////text("CONFIGURATIONS", 1100, height/2 + 330);
   textFont(font1);
   text("ARROW KEYS   to MOVE around grid ",  (width/2) + (width/5) + 103, height/2 + 50);
   text("ENTER KEY      to SELECT", (width/2) + (width/5) + 103, height/2 + 70);
   text("TAB KEY          to EXIT a section", (width/2) + (width/5) + 103, height/2 + 90);
   
+  // XBOX CONTROLLER BUTTONS
   fill(#C6C6C6);
   circle(1300, height/2 + 210, 70);
   circle(1380, height/2 + 210, 70);
@@ -501,7 +489,8 @@ public void draw() {
   rect((width/2) + (width/5) + 105 , height/2 + 200, 40, 20);
   rect((width/2) + (width/5) + 165 , height/2 + 200, 40, 20);
   rect((width/2) + (width/5) + 145 , height/2 + 220, 20, 40);
-
+  
+  // XBOX CONTROLLER HIGHLIGHTING
   if (entCircleL == 1) {
     fill (#1D7ABA);
     circle(1300, height/2 + 210, 70);
@@ -526,7 +515,8 @@ public void draw() {
     fill (#1D7ABA);
     rect((width/2) + (width/5) + 145, height/2 + 220, 20, 40);
   }
-
+  
+  // XBOX CONTROLLER COLOR HIGHLIGHT DESELECTION
   entCircleL = 0;
   entCircleR = 0;
   entLeft = 0;
@@ -535,16 +525,16 @@ public void draw() {
   entDown = 0;
   
   
-   //========================================================================================== Pattern Tag Text ========================================================================================================
+   // SELECTING A SYNTH
   if (synthSel == 1) {
-    //fill(#645605);
-    //rect(890, height/2 , 240, 25);
     fill(255);
     textSize(15);
     text("SELECT NOTE", 890, height/2 + 20);
     fill(#FFCD80);
     rect(890, height/2 + 35, 240, 295 );
-  }    
+  }   
+  
+  // HEADINGS FOR SECTIONS
   fill(250);
   textSize(15);
   text("INSTRUMENT", b + 33, a - 15);
@@ -558,13 +548,14 @@ public void draw() {
   fill(255);
   textSize(15);
   text("C O N T R O L S", (width/2) + (width/5) + 103, height/2 + 19);
+  
+  // TEXT FOR XBOX
   fill(0);
   textSize(15);
   text("ENTER", 1275, height/2 + 215);
   text("TAB", 1365, height/2 + 215);
   
-  //fill(255);
-  //rect(550, height/2 + 175, 20, 30);
+  // FUNCTION NAMES AND DEFINITIONS
   fill(255);
   textSize(20);
   text("GAIN", 530, height/2 + 180);
@@ -592,7 +583,7 @@ public void draw() {
   text("(change sound direction)", 760, height/2 + 375); 
   
   
-  
+  // INSTRUMENT NAMES
   fill(255);
   textSize(15);
   text("KICK", 160, height/2 + 140);
@@ -601,6 +592,8 @@ public void draw() {
   text("SYNTH", 160, height/2 + 275);
   text("CLAP", 290, height/2 + 275);
   //text("ENVELOPES", 245, height/2 + 360);
+  
+  //INSTRUMENT IMAGES
   cp5.setAutoDraw(false); 
   cp5.draw();
   image(imgKICK, 130, height/2 + 40, 105, 75);
@@ -617,9 +610,9 @@ public void draw() {
 //========================================================================================== Section highlighter ========================================================================================================
 void keyPressed() {
   if (keyCode == TAB) {
-    entCircleR = 1;
+    entCircleR = 1; //XBOX BUTTON HIGHLIGHTING
     
-    //
+    // EXITING THE PATTERNS SEXTION
     if (synthSel == 0 && (highlight == 1) && (redhighlight == 1 || redhighlight == 4)) {
       patList1 = 1;
       //instSelect[0] = 0;
@@ -630,6 +623,7 @@ void keyPressed() {
       currentPositionY = upward;
     }
     
+    // EXITING SYNTH VALUES
     if (entVal_pattern == 1 && highlight == 1 && righty >= 0 && (instruments[upward].getLabel() == "S Y N T H") && synthSel == 1 && (redhighlight == 1 || redhighlight == 4)) {
       synthSel = 0;
       highlight = 1;
@@ -639,7 +633,8 @@ void keyPressed() {
       //entVal_pattern = 0;
       //notesCaptionHide0();
     }
-
+    
+    // EXITING INSTRUMENT SELECTION
     if ((highlight == 2) && (redhighlight == 1 || redhighlight == 4)) {
       //instruments[upward].setCaptionLabel("");
       entVal_instrument = 1;
@@ -649,18 +644,20 @@ void keyPressed() {
       leave = 0;
     }
 
-
+    // EXITING THE FUNCTION ARRAY SECTION
     if ((propHighlight == 1) && redhighlight == 2) {
       propLeave = 0;
       propHighlight = 0;
       propcurrentPositionX = propRighty;
       propcurrentPositionY = propUpward;
     }
-
+    
+    // EXITING THE FUNCTION LIST SECTION
     if ((propHighlight == 2) && redhighlight == 2) {
       propHighlight--;
     }
-
+    
+    // EXITING THE FUNCTION PARAMETERS SECTION
     if ((propHighlight == 3) && redhighlight == 2) {
       if (instPropUpward == 0) {
         if (instPropRighty == 0) {
@@ -703,15 +700,20 @@ void keyPressed() {
   }
 
   if (keyCode == ENTER) {
+      entCircleL = 1; //XBOX BUTTON HIGHLIGHTING
+      
+    // ENTERING THE PATTERN ARRAY SECTION
     if ( entVal_instrument == 2 && (redhighlight == 1 || redhighlight == 4) ) {
       entVal_instrument = 3;
       
     }
+    // SELECTING A CELL IN THE PATTERN ARRAY 
     if (righty > -1 && righty < 8 && entVal_instrument == 1 &&  highlight == 1 && (redhighlight == 1 || redhighlight == 4)) {
       if (decide == 0) {
         decide = 1;
       }
     }
+    // ENTERING THE INSTRUMENT TYPE SECTION
     if ( righty == -1 && entVal_instrument == 1 &&  highlight == 1 && (redhighlight == 1 || redhighlight == 4)) {
       highlight = 2;
       entVal_instrument = 2;
@@ -727,6 +729,8 @@ void keyPressed() {
         }
       }
     }
+    
+    // ENTERING THE PATTERN ARRAY SECTION
     if (entVal_instrument == 0 && (redhighlight == 1 || redhighlight == 4) ) {
       righty = -1;
       upward = 0;
@@ -735,9 +739,9 @@ void keyPressed() {
       highlight = 1;
       patList1 = 0;
       ++entVal_instrument;
-      entCircleL = 1;
     }
-
+    
+    // SELCTING THE CELLS IN THE PATTERN ARRAY
     if (righty >= 0 && (redhighlight == 1 || redhighlight == 4)) {
       entCircleL = 1;
       if (righty == 8) {
@@ -747,16 +751,18 @@ void keyPressed() {
         
       }
     }
-
+    
+    // SELECTING A FUNCTION ARGUMENT
     if (redhighlight == 2 && propHighlight == 3) {
       funcPropSelec();
-      FunctionBlinker = 1;
     }
+    // ENTERING THE A FUNCTION ARGUMENT SECTION
     if (redhighlight == 2 && (propHighlight == 2)) {
       propHighlight++;
       time0Col = 0;
       time0Row = 0;
     }
+    // ENTERING THE FUNCTION LIST SECTION
     if (redhighlight == 2 && (propHighlight == 1)) {
       propHighlight++;
       
@@ -764,17 +770,20 @@ void keyPressed() {
 
     if (redhighlight == 2 && propUpward == 0 && propRighty == 8 && propHighlight == 0) {
       
-    } else if (redhighlight == 2 && propRighty != 8 && propHighlight == 0) {
+    }
+    
+    else if (redhighlight == 2 && propRighty != 8 && propHighlight == 0) {
       propHighlight++;
       propUpward = propcurrentPositionY;
       propRighty = propcurrentPositionX;
       propLeave = 1;
     }
-
+    
+    // SELECTING A CELL AFTER SELECTING A SYNTH INSTRUMENT
     if (entVal_pattern == 1 && highlight == 1 && righty >= 0 && instruments[upward].getLabel() == "S Y N T H" && synthSel < 2 && (redhighlight == 1 || redhighlight == 4)) {
       synthSel++;
     }
-
+    // APPLYING A CHOSEN SYNTH VALUE
     if (entVal_pattern == 1 && highlight == 1 && righty >= 0 && instruments[upward].getLabel() == "S Y N T H" && synthSel == 2 && (redhighlight == 1 || redhighlight == 4)) {
       synthSel = 0;
       notes0.deactivateAll();
@@ -791,13 +800,18 @@ void keyPressed() {
 
   if (key == CODED) {
     if (keyCode == UP) {
-      entUp = 1;
+      entUp = 1; //XBOX BUTTIN HIGHLIGHTING
+      
+      
       if (highlight == 0 && propHighlight == 0) {
         redhighlight = 1;
       }
+      
+      // MOVING UP PATTERN ARRAY
       if (highlight == 1 && upward > 0 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         upward--;
       }
+      // MOVING UP INSTRUMENT TYPE
       if (entVal_instrument == 2 && highlight == 2 && instUpward > 0 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4) ) {
         instUpward--;
         if(intRighty == 0){
@@ -809,19 +823,23 @@ void keyPressed() {
           snare1.play();
         }
       }
+      
+      // MOVING UP SYNTH OPTIONS
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1  && notes0Col <= 2 && notes0Col >= 1 && (redhighlight == 1 || redhighlight == 4)) {
         --notes0Col;
-        
       }
+      
+      // MOVING UP THE FUNCTION ARRAY
       if (redhighlight == 2 && propHighlight == 1 && propUpward > 0) {
         propUpward--;
       }
+      // MOVING UP THE FUNCTION LIST
       if (redhighlight == 2 && propHighlight == 2 && instPropUpward > 0) {
         instPropUpward--;
         
       }
 
-
+      // MOVING UP THE FUNCTION PARAMETERS
       if (redhighlight == 2 && propHighlight == 3) {
         if (instPropUpward == 0 && instPropRighty == 0) {
           time0Col--;
@@ -848,19 +866,20 @@ void keyPressed() {
           
         }
       }
+      
     } else if (keyCode == DOWN) {
-      entDown = 1;
+      entDown = 1; // XBOX BUTTON HIGHLIGHING
       if (highlight == 0 && synthSel == 0 && propHighlight == 0) {
         
       }
+      // MOVING DOWN THE PATTERN AND INSTRUMENT AREA 
       if (highlight == 1 && upward < 7 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         upward++;
       }
+      // MOVING DOWN THE INSTRYMENT TYPE
       if (entVal_instrument == 2 && highlight == 2 && instUpward < 1 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
-        
         if(intRighty == 0){
           instUpward++;
-          
         }
         if(intRighty == 1){
           instUpward++;
@@ -871,6 +890,7 @@ void keyPressed() {
           
         }
       }
+      // MOVING DOWN THE SYNTH VALUES
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1 && notes0Col >= 0 && notes0Col <= 1 && (redhighlight == 1 || redhighlight == 4)) {
 
         if (notes0Col == 1 && notes0Row > 0) {
@@ -880,16 +900,15 @@ void keyPressed() {
           notes0Col++;
         }
       }
-      //propRighty = 8, propUpward = 0, propHighlight = 0 property = 8, highlight = 0, righty = 8, currentPositionX = -1, upward = 0, redhighlight = 0,;
-      if (redhighlight == 2 && propHighlight == 1 && propUpward < 8) {
+     // MOVING DOWN THE PROPERTY AREA
+     if (redhighlight == 2 && propHighlight == 1 && propUpward < 8) {
         propUpward++;
         propUpward = constrain (propUpward, 0, 7);
       }
       if (redhighlight == 2 && propHighlight == 2 && instPropUpward == 0) {
         instPropUpward++;
       }
-
-
+      // MOVING DOWN THE FUNCTION PARAMETERS
       if (redhighlight == 2 && propHighlight == 3) {
         if (instPropUpward == 0 && instPropRighty == 0) {
           time0Col++;
@@ -913,14 +932,17 @@ void keyPressed() {
         }
       }
     } else if (keyCode == RIGHT) {
-      entRight = 1;
+      entRight = 1; // XBOX BUTTON HIGHLIGHTING
+      // MOVING RIGHT THE SECTION HIGHLIGHING
       if (highlight == 0 && propHighlight == 0) {
         redhighlight = 2;
       }
+      // MOVING RIGHT THE PATTERN AND INSTRUMENT AREA
       if (highlight == 1 && righty < 7 && righty >= -1 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         righty++;
         //print(righty);
       } 
+      // MOVING RIGHT THE INSTRUMENT OPTIONS
       if (entVal_instrument == 2 && highlight == 2 && intRighty < 2 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         if(instUpward == 0){
           intRighty++;
@@ -947,6 +969,7 @@ void keyPressed() {
         //  
         //}
       }
+      // MOVING RIGHT THE SYNTH VALUES
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1 && notes0Row < 2 && (redhighlight == 1 || redhighlight == 4)) {
         if (notes0Col == 2) {
           notes0Row++;
@@ -955,18 +978,19 @@ void keyPressed() {
           notes0Row++;
         }
       }
-
+      // MOVING RIGHT THE FUNCTION PROPERTIES
       if (redhighlight == 2 && propUpward >= 0 && propRighty >= 0 && propRighty < 7 && propHighlight == 1) {
         propRighty++;
         propRighty = constrain(propRighty, 0, 3);
         
       }
+      // MOVING RIGHT THE FUNCTION LIST
       if (redhighlight == 2 && propHighlight == 2 && instPropRighty < 2) {
         instPropRighty++;
         
       }
 
-      //notes0Row = 0, notes0Col = 0, time0Row = 0, time0Col = 0
+      // MOVING RIGHT THE FUNCTION PARAMETERS
       if (redhighlight == 2 && propHighlight == 3) {
         if (instPropUpward == 0 && instPropRighty == 0) {
           
@@ -987,14 +1011,16 @@ void keyPressed() {
         }
       }
     } else if (keyCode == LEFT) {
-      entLeft = 1;
+      entLeft = 1; //XBOX BUTTON HIGHLIGHTING
       if (highlight == 0 && synthSel == 0 && propHighlight == 0) {
         redhighlight = 4;
       }
+      // MOVING LEFT THE PATTERN AND INSTRUMENT AREA
       if (highlight == 1 && righty > -1 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         righty--;
         //print(righty);
       }
+      // MOVING LEFT THE INSTRUMENT OPTIONS
       if (entVal_instrument == 2 && highlight == 2 && intRighty > 0 && synthSel == 0 && (redhighlight == 1 || redhighlight == 4)) {
         intRighty--;
         if(instUpward == 0){
@@ -1017,22 +1043,21 @@ void keyPressed() {
           }
         }
       }
+      // MOVING LEFT THE SYNTH OPTIONS
       if (entVal_pattern == 1 && highlight == 1 && synthSel == 1  && synthSel == 1 && notes0Row > 0 ) {
         notes0Row--;
       }
 
-      //propRighty = 8, propUpward = 0, propHighlight = 0 property = 8, highlight = 0, righty = 8, currentPositionX = -1, upward = 0, redhighlight = 0,;
+      // MOVING LEFT THE PROPERTY SECTION
       if (redhighlight == 2 && propUpward >= 0 && propRighty >= 0 && propRighty < 7 && propHighlight == 1) {
         propRighty--;
         propRighty = constrain(propRighty, 0, 5);
-        
       }
+      // MOVING LEFT THE FUNCTION LIST
       if (redhighlight == 2 && propHighlight == 2 && instPropRighty > 0) {
         instPropRighty--;
-        
       }
-
-
+      // MOVING LEFT THE FUNCTION PARAMETERS
       if (redhighlight == 2 && propHighlight == 3) {
         if (instPropUpward == 0 && instPropRighty == 0) {
           
@@ -1059,7 +1084,7 @@ void keyPressed() {
   }
 }
 
-// Function for assigning musical notes
+// FUNCTION FOR ASSIGNING MUSICAL NOTES
 void notesCaptionHide0(){
      for(int i = 0; i< 8; i++){
      if(righty == i){
@@ -1097,7 +1122,7 @@ void notesCaptionHide0(){
      }
  }
 
-// Function for Musical notes radiobuttons
+// FUNCTION FOR MUSICAL NOTES RADIO BUTTOINS
 void notes() {
   notes0 = cp5.addRadioButton("notesRadioButton0");
   notes0.setPosition(930, height/2 + 80);
@@ -1149,7 +1174,7 @@ void notes() {
   }
 }
 
-// Function for Playing created patterns 
+// FUNCTION FOR PLAYING CREATED PATTERNS
 void playSound(int run){
   for(int i = 0; i < 8; i++){
     if(instruments[i].getLabel() == "S Y N T H" && instList[i][run-1] != 0.0 && patternsArray[i][run-1].getLabel() != ""){
@@ -1181,7 +1206,7 @@ void playSound(int run){
     }
   }
 }
-
+// FUNCTION FOR MOVING AROUND THE PROPERTY SECTION
 void property0() {
   // upper property section
   for(int i = 0; i < 4; i++){
@@ -1202,10 +1227,9 @@ void property0() {
   }
 }
 
-// property section after selecting
+// FUNCTION FOR FUNCTION LIST SECTION 
 void propFunction0() {
-   
-  // upper property section stagnant
+  // Function property section remains selected
    for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -1218,7 +1242,7 @@ void propFunction0() {
     }
   }
   
-  // lower property section
+  // Function list section
   for(int i = 0; i < 3; i++){
     if (instPropRighty == i){
       for (int h = 0; h < 100; h += 50){

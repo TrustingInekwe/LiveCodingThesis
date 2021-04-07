@@ -1,9 +1,12 @@
+
+// SELECTING AN INSTRUMENT TYPE!!!
+
 void selectInstrument(){
   if(patList2 == 0){
-    if(instSelect[upward] == 1){
+    if(instSelect[upward] == 1){ // checking an instrument row
       highlight = 2;
-      if(instUpward == 0){
-        //cp5.get(controlP5.Button.class, "SNARE" + 0).setColorBackground( #e0115f);
+      if(instUpward == 0){ //FIRST ROW FOR INSTRUMENT TYPE 
+        //FOR A KICK INSTRUMENT
         if(intRighty == 0){
          fill(#C62222);
           int passedMillis = millis() - time; // calculates passed milliseconds
@@ -12,9 +15,6 @@ void selectInstrument(){
             fill(#000000);
           }
          rect(120, height/2 + 30, 125, 95);
-          //print(intRighty+"..."+intRighty);
-          if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 0){
-          }
             if(entVal_instrument == 3){
               for(int i = 0; i < 8; i++){
                    //patternsArray[propUpward][i].setCaptionLabel("");
@@ -30,6 +30,7 @@ void selectInstrument(){
                 leave = 0;
              }
         }
+        //FOR A SNARE INSTRUMENT
         if(intRighty == 1){
           fill(#C62222);
           int passedMillis = millis() - time; // calculates passed milliseconds
@@ -38,9 +39,6 @@ void selectInstrument(){
             fill(#000000);
           }
          rect(248, height/2 + 30, 125, 95);
-          if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 1){
-            //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("S N A R E").setColorCaptionLabel(255).setFont(font2);
-          }
           if(entVal_instrument == 3){
               for(int i = 0; i < 8; i++){
                    //patternsArray[propUpward][i].setCaptionLabel("");
@@ -55,17 +53,15 @@ void selectInstrument(){
             leave = 0;
           }
         }
+        //FOR A HAT INSTRUMENT
           if(intRighty == 2){
             fill(#C62222);
-          int passedMillis = millis() - time; // calculates passed milliseconds
+          int passedMillis = millis() - time;
           if(passedMillis >= 315){
               time = millis();
             fill(#000000);
           }
              rect(375, height/2 + 30, 125, 95);
-            if(entVal_instrument == 2 && highlight == 2 && instUpward == 0 && intRighty == 2){
-              //cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("H A T").setColorCaptionLabel(255).setFont(font2);
-            }
             if(entVal_instrument == 3){
               for(int i = 0; i < 8; i++){
                    //patternsArray[propUpward][i].setCaptionLabel("");
@@ -81,8 +77,8 @@ void selectInstrument(){
             }
           }
         }
-        //print
-        if(instUpward == 1){
+        if(instUpward == 1){  //SECOND ROW FOR INSTRUMENT TYPE 
+        //FOR A SYNTH INSTRUMENT
           if(intRighty == 0){
             fill(#C62222);
           int passedMillis = millis() - time; // calculates passed milliseconds
@@ -109,6 +105,7 @@ void selectInstrument(){
                 leave = 0;
               }
           }
+          //FOR A CLAP INSTRUMENT
           if(intRighty == 1){
             fill(#C62222);
           int passedMillis = millis() - time; // calculates passed milliseconds
@@ -134,18 +131,7 @@ void selectInstrument(){
                 leave = 0;
             }
           }
-        if(intRighty == 2){
-          
-        }
-        }
-        //if (instUpward == 2){
-        //    if(intRighty == 0){
-        //  }
-          
-          
-        //  if (intRighty == 1){
-        //  }
-        //}    
+        }    
     }       
     }
  }

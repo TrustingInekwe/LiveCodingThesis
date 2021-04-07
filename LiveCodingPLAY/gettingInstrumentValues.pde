@@ -1,6 +1,10 @@
+
+// INITIALIZING A SYNTH/KICK INSTRUMENT
+
 void gettingInstrumentValues(){
   for(int i = 0; i < 8; i++){
-   if(instruments[i].getLabel() == "S Y N T H"){
+    //initializing the pattern array for a synth
+   if(instruments[i].getLabel() == "S Y N T H"){ 
       if(patternsArray[i][0].getLabel() == "1"){instList[i][0] = frNew[i][0];}
       if(patternsArray[i][0].getLabel() == "2"){instList[i][0] = frNew[i][1];}
       if(patternsArray[i][0].getLabel() == "3"){instList[i][0] = frNew[i][2];}

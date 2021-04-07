@@ -1,3 +1,6 @@
+
+// MOVING DOTS!!!!!!
+
 void movingRectangles(int k){
    int h = (int) k;
     int j = 65 + h;

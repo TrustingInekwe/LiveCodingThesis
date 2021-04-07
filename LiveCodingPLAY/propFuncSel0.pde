@@ -1,4 +1,8 @@
+
+// OPENING FUNCTION ARGUMENTS SECTION!!!
+
 void propFuncSel0() {
+  // Function for function property stays highlighted
    for(int i = 0; i < 4; i++){
     if (propRighty == i){
       for (int h = 0; h < 400; h += 50){
@@ -10,6 +14,7 @@ void propFuncSel0() {
       }
     }
   }
+  // Function for function list stays highlighted
   for(int i = 0; i < 3; i++){
     if (instPropRighty == i){
       for (int h = 0; h < 100; h += 50){
@@ -21,34 +26,21 @@ void propFuncSel0() {
       }
     }
   }
-  
+  // OPENING THE GAIN ARGUMENTS SECTION
   if (instPropUpward == 0) {
     if (instPropRighty == 0) {
-       
-      //fill(#7EFFFF);
-      //rect(885, height/2 - 5, 250, 35);
-      //fill(#645605);
-      //rect(890, height/2 , 240, 25); //funtion parameter rectangle
       fill(255);
       textSize(15);
       text("FUNCTION PARAMETERS", 890, height/2 + 20);
       fill(#FFCD80);
       rect(890, height/2 + 35, 240, 295 );
       
-      //stroke(#AF69EF);
-      //strokeWeight(15.0);
-      //strokeCap(SQUARE);
-      //line(770, height/2 + 81, 1010, height/2 + 81 );
-      //noStroke();
       time0 = cp5.addRadioButton("timeRadioButton1");
       time0.setPosition(930, height/2 + 80);
       time0.setSize(20, 20);
       time0.setColorForeground(color(255));
       time0.setColorActive(color(#C62222));
       time0.setColorLabel(color(0));
-      //time0.setColorLabel(color(0));
-      //time0.setItemsPerRow(3);
-      //time0.setSpacingColumn(50);
       time0.setSpacingRow(15);
       time0.addItem("Default(0.5)", 1).getItem(0).setFont(font1);
       time0.addItem("Medium(1.0)", 2).getItem(1).setFont(font1);
@@ -79,30 +71,27 @@ void propFuncSel0() {
         time0.activate(6);
       }
     }
-
+    
     if (instPropRighty == 1) {
-      if (instruments[propUpward].getLabel() == "S N A R E" || instruments[propUpward].getLabel() == "C L A P" 
-          || instruments[propUpward].getLabel() == "H A T" || instruments[propUpward].getLabel() == "K I C K"){
-        
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-            time = millis();
-        }
+      // DECLINING TO OPEN THE TRANSPOSE ARGUMENT SECTION IF SNARE, CLAP, HAT OR KICK
+      if (instruments[propUpward].getLabel() == "S N A R E" 
+          || instruments[propUpward].getLabel() == "C L A P" 
+          || instruments[propUpward].getLabel() == "H A T" 
+          || instruments[propUpward].getLabel() == "K I C K"){ 
+            
             fill(#FFCD80);
             rect(890, height/2 + 35, 240, 295 );
             fill(0);
             //textFont(font1, 32);
             textFont(font2);
             //textSize(20);
-            text("can't", 900, height/2 + 60);
-            text("transpose", 900, height/2 + 90);
-            text("this instrument!", 900, height/2 + 120);
-            //showMessageDialog(null, "can't transpose this instrument!", "Alert", ERROR_MESSAGE);
-            //alertDialog.dismiss();
+            text("can't", 900, height/2 + 160);
+            text("transpose", 900, height/2 + 180);
+            text("this instrument!", 900, height/2 + 200);
+            image(imgDanger, 950, height/2 + 60, 105, 75);
           } 
       else {    
-        //fill(#645605);
-        //rect(890, height/2 , 240, 25);
+        // OPENING THE TRANSPOSE ARGUMENT SECTION
         fill(255);
         textSize(15);
         text("FUNCTION PARAMETERS", 890, height/2 + 20);
@@ -165,28 +154,24 @@ void propFuncSel0() {
     }
     
     if (instPropRighty == 2) {
-      if (instruments[propUpward].getLabel() == "S N A R E" || instruments[propUpward].getLabel() == "C L A P" 
-          || instruments[propUpward].getLabel() == "H A T" || instruments[propUpward].getLabel() == "K I C K"){
-        
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-            time = millis();
-        }
+      // DECLINING TO OPEN THE EFFECT ARGUMENT SECTION IF SNARE, CLAP, HAT OR KICK
+      if (instruments[propUpward].getLabel() == "S N A R E" 
+          || instruments[propUpward].getLabel() == "C L A P" 
+          || instruments[propUpward].getLabel() == "H A T" 
+          || instruments[propUpward].getLabel() == "K I C K"){
             fill(#FFCD80);
             rect(890, height/2 + 35, 240, 295 );
             fill(0);
             //textFont(font1, 32);
             textFont(font2);
             //textSize(20);
-            text("can't", 900, height/2 + 60);
-            text("add effects to", 900, height/2 + 90);
-            text("this instrument!", 900, height/2 + 120);
-            //showMessageDialog(null, "can't transpose this instrument!", "Alert", ERROR_MESSAGE);
-            //alertDialog.dismiss();
+            text("can't", 900, height/2 + 160);
+            text("add effects to", 900, height/2 + 180);
+            text("this instrument!", 900, height/2 + 200);
+            image(imgDanger, 950, height/2 + 60, 105, 75);
           }
         else{
-        //fill(#645605);
-        //rect(890, height/2 , 240, 25);
+        // OPENING THE EFFECT ARGUMENT SECTION
         fill(255);
         textSize(15);
         text("FUNCTION PARAMETERS", 890, height/2 + 20);
@@ -231,8 +216,11 @@ void propFuncSel0() {
   }
   if (instPropUpward == 1) {
     if (instPropRighty == 0) {
-      if (instruments[propUpward].getLabel() == "S N A R E" || instruments[propUpward].getLabel() == "C L A P" 
-          || instruments[propUpward].getLabel() == "H A T" || instruments[propUpward].getLabel() == "K I C K"){
+      // DECLINING TO OPEN THE WAVE ARGUMENT SECTION IF SNARE, CLAP, HAT OR KICK
+      if (instruments[propUpward].getLabel() == "S N A R E" 
+          || instruments[propUpward].getLabel() == "C L A P" 
+          || instruments[propUpward].getLabel() == "H A T" 
+          || instruments[propUpward].getLabel() == "K I C K"){
         
             int passedMillis = millis() - time; // calculates passed milliseconds
             if(passedMillis >= 315){
@@ -244,15 +232,13 @@ void propFuncSel0() {
             //textFont(font1, 32);
             textFont(font2);
             //textSize(20);
-            text("can't", 900, height/2 + 60);
-            text("add a wave to", 900, height/2 + 90);
-            text("this instrument!", 900, height/2 + 120);
-            //showMessageDialog(null, "can't transpose this instrument!", "Alert", ERROR_MESSAGE);
-            //alertDialog.dismiss();
+            text("can't", 900, height/2 + 160);
+            text("add a wave to", 900, height/2 + 180);
+            text("this instrument!", 900, height/2 + 200);
+            image(imgDanger, 950, height/2 + 60, 105, 75);
           }
           else{
-          //fill(#645605);
-          //rect(890, height/2 , 240, 25);
+          // OPENING THE WAVE ARGUMENT SECTION
           fill(255);
           textSize(15);
           text("FUNCTION PARAMETERS", 890, height/2 + 20);
@@ -288,9 +274,7 @@ void propFuncSel0() {
           }
         }
     }      
-    if (instPropRighty == 1) {
-      //fill(#645605);
-      //rect(890, height/2 , 240, 25);
+    if (instPropRighty == 1) { // OPENING THE DELETE ARGUMENT OPTIONS
       fill(255);
       textSize(15);
       text("FUNCTION PARAMETERS", 890, height/2 + 20);
@@ -302,8 +286,6 @@ void propFuncSel0() {
       delete0.setColorForeground(color(120));
       delete0.setColorActive(color(#C62222));
       delete0.setColorLabel(color(0));
-      //delete0.setItemsPerRow(3);
-      //delete0.setSpacingColumn(5);
       delete0.setSpacingRow(50);
       delete0.addItem("Function", 1).getItem(0).setFont(font1);
       delete0.addItem("Pattern", 2).getItem(1).setFont(font1);
@@ -319,26 +301,19 @@ void propFuncSel0() {
     if (instPropRighty == 2) {
       if (instruments[propUpward].getLabel() == "C L A P" 
            || instruments[propUpward].getLabel() == "H A T"){
-        
-            int passedMillis = millis() - time; // calculates passed milliseconds
-            if(passedMillis >= 315){
-            time = millis();
-        }
+            // DECLINING TO OPEN THE PAN ARGUMENT SECTION IF CLAP OR HAT
             fill(#FFCD80);
             rect(890, height/2 + 35, 240, 295 );
             fill(0);
-            //textFont(font1, 32);
             textFont(font2);
             //textSize(20);
-            text("can't", 900, height/2 + 60);
-            text("pan", 900, height/2 + 90);
-            text("this instrument!", 900, height/2 + 120);
-            //showMessageDialog(null, "can't transpose this instrument!", "Alert", ERROR_MESSAGE);
-            //alertDialog.dismiss();
+            text("can't", 900, height/2 + 160);
+            text("pan", 900, height/2 + 180);
+            text("this instrument!", 900, height/2 + 200);
+            image(imgDanger, 950, height/2 + 60, 105, 75);
           }
           else{
-            //fill(#645605);
-            //rect(890, height/2 , 240, 25);
+            // OPENING THE PAN ARGUMENT SECTION 
             fill(255);
             textSize(15);
             text("FUNCTION PARAMETERS", 890, height/2 + 20);
