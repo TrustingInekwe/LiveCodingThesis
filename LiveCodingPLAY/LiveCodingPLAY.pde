@@ -1,6 +1,5 @@
 /**
  *
- * 
  * Name: TRUSTING O. INEKWE 
  * Date: 2020/2021 
  * @version 
@@ -57,7 +56,7 @@ int[] instSelect = new int[8]; // creating an array of instruments for EACH ROW
 int highlight = 0; // highlight for selecting PATTERN ARRAY AREA
 int righty = 8, currentPositionY = 0, currentPositionX = -1; // "righty" for moving RIGHT AND LEFT in the PATTERN AREA, "currentPositionY/X" for last position in the PATTERN ARRAY
 int upward = 0; // "upward" for MOVING UP and DOWN in the PATTERN AREA
-int redhighlight = 4, leave = 0, close = 0, run = 0, playALL = 0; // "redhighlight" for selecting the INSTRUMENT and PATTERN ARRAY area
+int redhighlight = 4, leave = 0, close = 0, run = 0, playALL = 0; // "redhighlight = 4" for selecting the INSTRUMENT and PATTERN ARRAY SECTION area
 int intRighty = 3, instUpward = 0;  // "intRighty" for moving R/L the FUNCTION LIST and "instUpward" for moving U/D the FUNCTION LIST
 int entVal_instrument = 0; // used for selectin the instrument section of the INSTRUMENT and PATTERN ARRAY area
 int entVal_pattern = 0; // used for selectin the pattern array section of the INSTRUMENT and PATTERN ARRAY area
@@ -69,9 +68,9 @@ int propRighty = 0, propUpward = 0; // "propRighty" for moving RIGHT AND LEFT in
 int propHighlight = 0; // for selcting the function property section
 int instPropRighty = 0, instPropUpward = 0; // "instPropRighty" for moving RIGHT AND LEFT in the FUNCTION LIST AREA, "instPropUpward" for moving UP and DOWN in the FUNCTION LIST AREA
 int propcurrentPositionX = 0, propcurrentPositionY = 0; // for saving the current version of the property area.
-int patList1 = 0; // used for moving around the pattern array (0 = you can move around the instrument and pattern array, 1 = you can't!)
-int patList2 = 0; // used for moving around the instrument type section after moving around the pattern array
-int decide = 0; // SELECTING CHOICES IN THE PATTERN ARRAY
+int patList1 = 0; // used for moving around the pattern array (0 = you can move around the instrument and PATTERN ARRAY, 1 = you can't!)
+int patList2 = 0; // used for moving around the instrument type section after moving around the PATTERN ARRAY
+int decide = 0; // Seleccting choice in the PATTERN ARRAY
 
 //Returns the number of milliseconds (thousandths of a second) since starting the program
 int time = millis(); 
@@ -212,7 +211,7 @@ public void setup() {
     }
   }
   
-  //  Function List INITIALIZATION  
+  //  Functions in Function List INITIALIZATION  
   for (int i = 0; i < 8; i++) {
     transVal[i] = 0.0;
   }
@@ -246,12 +245,13 @@ public void setup() {
       decision[i][j] = 8;
     }
   }
+  //  PATTERN ARRAY FREQUENCY FOR CHOSEN CHOICES (DECISION) ARRAY INITIALIZATION
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) { 
       instList[i][j] = 0.0;
     }
   }
-
+  //  PATTERN ARRAY FREQUENCY FOR CHOSEN CHOICES (DECISION) ARRAY INITIALIZATION
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) { 
       myNote[i][j] = new ToneInstrument(instList[i][j], panValue[i], disWave[i], gainValue[i], delayVal[i], bitRes[i]);
@@ -319,7 +319,7 @@ public void draw() {
   }
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 3.0) {
-      frNew[propUpward][i] = freqBaseVal[i] * 4;
+      frNew[propUpward][i] = freqBaseVal[i] * 4; // TRANSPOSING HIGHER
     }
   }
   for (int i = 0; i < 7; i++) {
@@ -329,12 +329,12 @@ public void draw() {
   }
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 0.5) {
-      frNew[propUpward][i] = freqBaseVal[i] / 2;
+      frNew[propUpward][i] = freqBaseVal[i] / 2; // TRANSPOSING AN OCTAVE DOWN
     }
   }
   for (int i = 0; i < 7; i++) {
     if (transVal[propUpward] == 0.25) {
-      frNew[propUpward][i] = freqBaseVal[i] / 4;
+      frNew[propUpward][i] = freqBaseVal[i] / 4; // TRANSPOSING LOWER
     }
   }
   for (int i = 0; i < 7; i++) {
@@ -624,7 +624,7 @@ void keyPressed() {
     }
     
     // EXITING SYNTH VALUES
-    if (entVal_pattern == 1 && highlight == 1 && righty >= 0 && (instruments[upward].getLabel() == "S Y N T H") && synthSel == 1 && (redhighlight == 1 || redhighlight == 4)) {
+    if ((entVal_pattern == 1) && (highlight == 1) && (righty >= 0) && (instruments[upward].getLabel() == "S Y N T H") && (synthSel == 1) && (redhighlight == 1 || redhighlight == 4)) {
       synthSel = 0;
       highlight = 1;
       entVal_pattern = 0;
@@ -691,7 +691,7 @@ void keyPressed() {
         }
         if (instPropRighty == 2) {
           propHighlight--;
-          if (instruments[propUpward].getLabel() == "S Y N T H" || instruments[propUpward].getLabel() == "K I C K" || instruments[propUpward].getLabel() == "S N A R E"){
+          if ((instruments[propUpward].getLabel() == "S Y N T H") || (instruments[propUpward].getLabel() == "K I C K") || (instruments[propUpward].getLabel() == "S N A R E")){
             pan0.hide();
           }
         }
