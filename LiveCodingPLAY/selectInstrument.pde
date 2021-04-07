@@ -3,9 +3,10 @@
 
 void selectInstrument(){
   if(patList2 == 0){
-    if(instSelect[upward] == 1){ // checking an instrument row
+    if(instSelect[upward] == 1){ // Checking an instrument row
       highlight = 2;
-      if(instUpward == 0){ //FIRST ROW FOR INSTRUMENT TYPE 
+      if(instUpward == 0){ //First row for instrument type
+        
         //FOR A KICK INSTRUMENT
         if(intRighty == 0){
          fill(#C62222);
@@ -15,20 +16,20 @@ void selectInstrument(){
             fill(#000000);
           }
          rect(120, height/2 + 30, 125, 95);
-            if(entVal_instrument == 3){
-              for(int i = 0; i < 8; i++){
-                   //patternsArray[propUpward][i].setCaptionLabel("");
-                   decision[upward][i] = 0;
-                   cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
-                 }
-            cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("K I C K").setColorCaptionLabel(255).setFont(font2).setColorBackground( color(#eabafe) );
-                highlight = 1;
-                instSelect[upward] = 0;
-                cp5.get(controlP5.Button.class, "KICK" + 0).setColorBackground( color( #0B1D28) );
-                cp5.get(controlP5.Button.class, "instruments" + upward).setColorBackground( color(#87CEFF) );
-                entVal_instrument = 1;
-                leave = 0;
+        if(entVal_instrument == 3){
+          for(int i = 0; i < 8; i++){
+               //patternsArray[propUpward][i].setCaptionLabel("");
+               decision[upward][i] = 0;
+               cp5.get(controlP5.Button.class, "patternsArray" + upward + i).setColorBackground( color(#ffffff) ).setCaptionLabel("");
              }
+        cp5.get(controlP5.Button.class, "instruments" + upward).setCaptionLabel("K I C K").setColorCaptionLabel(255).setFont(font2).setColorBackground( color(#eabafe) );
+            highlight = 1;
+            instSelect[upward] = 0;
+            cp5.get(controlP5.Button.class, "KICK" + 0).setColorBackground( color( #0B1D28) );
+            cp5.get(controlP5.Button.class, "instruments" + upward).setColorBackground( color(#87CEFF) );
+            entVal_instrument = 1;
+            leave = 0;
+         }
         }
         //FOR A SNARE INSTRUMENT
         if(intRighty == 1){
